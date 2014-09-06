@@ -27,6 +27,8 @@ Alternatively, add the script to the bottom of your page:
 <script src="//julian.com/research/velocity/vmd.min.js"></script>
 ```
 
+VMD's documentation is outputted to the console upon load.
+
 **Author**
 
 [Julian Shapiro](http://twitter.com/shapiro).
