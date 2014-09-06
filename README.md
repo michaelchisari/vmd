@@ -13,7 +13,7 @@ Star/watch this repo in case the embed URL changes.
 
 VMD embeds jQuery and Velocity; you do not need to load them beforehand.
 
-VMD will minified since this repo is for bug reports only, not PR's.
+VMD is only distributed in a minified form since this repo is for bug reports only, not PR's or feature suggestions.
 
 **Usage**
 
