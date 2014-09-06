@@ -3,7 +3,7 @@ Velocity Motion Designer (VMD)
 
 **Description**
 
-VMD allows is a JS script you load onto an existing page to inject it with animations in real-time. Once you're done animating, you can export the animations into 1-for-1 Velocity code.
+VMD is a JS script you load onto a page to inject it with animations in real-time. Once you're done animating, you export your the animations into 1-for-1 Velocity code.
 
 Watch this tutorial for a full overview: [Coming Soon](http://ComingSoon.com).
 
