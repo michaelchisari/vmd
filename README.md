@@ -5,7 +5,7 @@ Velocity Motion Designer (VMD)
 
 VMD is a JS snippet that you load onto a page in order to create animations in real-time. Once you're done creating, you can export your work into 1-for-1 Velocity code. (The code is also mostly compatible with jQuery and GSAP.)
 
-Watch this for the full overview: [youtube.com/watch?v=7IxhIMIdkPs](https://www.youtube.com/watch?v=7IxhIMIdkPs&hd=1). Audio is terrible, but sit through it. VMD is amazing.
+Watch this for the full overview: [youtube.com/watch?v=7IxhIMIdkPs](https://www.youtube.com/watch?v=7IxhIMIdkPs&hd=1). Audio is terrible, but the tutorial is worth sitting through.
 
 **Documentation**
 
