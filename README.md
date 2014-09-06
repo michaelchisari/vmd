@@ -13,7 +13,7 @@ Star/watch this repo in case the embed URL changes.
 
 VMD embeds jQuery and Velocity; you do not need to load them beforehand.
 
-VMD is only distributed in a minified form since this repo is for bug reports only, not PR's or feature suggestions.
+VMD is not distributed beyond its minified form since this repo is for bug reports only, not PR's or feature suggestions.
 
 **Usage**
 
@@ -30,6 +30,3 @@ Alternatively, add the script to the bottom of your page:
 **Author**
 
 [Julian Shapiro](http://twitter.com/shapiro).
-
-
-
