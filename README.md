@@ -1,13 +1,13 @@
 Velocity Motion Designer (VMD)
 ===
 
-*Description*
+**Description**
 
 VMD allows is a JS script you load onto an existing page to inject it with animations in real-time. Once you're done animating, you can export the animations into 1-for-1 Velocity code.
 
 Watch this tutorial for a full overview: [Coming Soon](http://ComingSoon.com).
 
-*Notes*
+**Notes**
 
 Star/watch this repo in case the embed URL changes.
 
@@ -15,7 +15,7 @@ This package embeds jQuery and Velocity; you do not need to load them in additio
 
 VMD remains minified as this repo is not for PR's, but rather bug reports only.
 
-*Usage*
+**Usage**
 
 Open up dev tools and paste this into the console:  
 ```javascript
