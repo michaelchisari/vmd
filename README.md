@@ -7,6 +7,10 @@ VMD is a JS snippet that you load onto a page in order to design animations in r
 
 Watch this tutorial for the full overview: [youtu.be/7IxhIMIdkPs](http://youtu.be/7IxhIMIdkPs&hd=1).
 
+**Documentation**
+
+VMD's documentation is outputted to the browser console upon script load.
+
 **Usage**
 
 Open up dev tools and paste this into your console:  
@@ -18,10 +22,6 @@ Alternatively, add this to the bottom of your page:
 ```html
 <script src="//julian.com/research/velocity/vmd.min.js"></script>
 ```
-
-**Documentation**
-
-VMD's documentation is outputted to the browser console upon load.
 
 **Important**
 
