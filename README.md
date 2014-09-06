@@ -3,9 +3,9 @@ Velocity Motion Designer (VMD)
 
 **Description**
 
-VMD is a JS script that you load onto a page in order to enhance it with animations in real-time. Once you're done creating your animations, you export them into 1-for-1 Velocity code.
+VMD is a JS snippet that you load onto a page in order to design animations in real-time. Once you're done creating your animations, you can export them into 1-for-1 Velocity code. (The code is also mostly compatible with jQuery and GSAP.)
 
-Watch this tutorial for the full overview: [Coming Soon](http://ComingSoon.com).
+Watch this tutorial for the full overview: [youtu.be/7IxhIMIdkPs](http://youtu.be/7IxhIMIdkPs&hd=1).
 
 **Usage**
 
@@ -21,13 +21,13 @@ Alternatively, add the script to the bottom of your page:
 
 **Documentation**
 
-VMD's documentation is outputted to the console upon load.
+VMD's documentation is outputted to the browser console upon load.
 
-**Notes**
+**Important**
 
 Star/watch this repo in case the embed URL changes.
 
-VMD embeds jQuery and Velocity; you do not need to load them beforehand.
+VMD includes jQuery and Velocity; you do not need to load them beforehand.
 
 VMD is not distributed beyond its minified form since this repo is for bug reports only, not PR's or feature suggestions.
 
