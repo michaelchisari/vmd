@@ -14,7 +14,7 @@ Open up dev tools and paste this into your console:
 (function(d) { var vmd=d.createElement("script"); vmd.src="//julian.com/research/velocity/vmd.min.js"; d.body.appendChild(vmd); })(document);
 ```
 
-Alternatively, add the script to the bottom of your page:  
+Alternatively, add this to the bottom of your page:  
 ```html
 <script src="//julian.com/research/velocity/vmd.min.js"></script>
 ```
@@ -33,4 +33,4 @@ VMD is not distributed beyond its minified form since this repo is for bug repor
 
 **Author**
 
-[Julian Shapiro](http://twitter.com/shapiro).
+[Julian Shapiro](http://twitter.com/shapiro)
