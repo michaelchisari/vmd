@@ -29,7 +29,7 @@ Alternatively, add the script to the bottom of your page:
 
 **Author**
 
-(Julian Shapiro)(http://twitter.com/shapiro).
+[Julian Shapiro](http://twitter.com/shapiro).
 
 
 
