@@ -7,7 +7,7 @@ Watch the video for a full overview: [youtube.com/watch?v=7IxhIMIdkPs](https://w
 
 VMD is a JS snippet that you load onto a page in order to create animations in real-time. Once you're done creating, you can export your work into 1-for-1 Velocity code. (The code is also mostly compatible with jQuery and GSAP.)
 
-VMD saves countless hours of dev time by preventing constant IDE <--> browser switching and repeated UI state reconstructing. Further, it streamlines the designers <--> developer workflow by allowing them to sit together and design in real-time instead of repeatedly rebuilding/proposing changes.
+VMD saves countless hours of dev time by preventing constant IDE <--> browser switching and repeated UI state reconstructing. Further, it streamlines the designers <--> developer workflow by allowing them to work alongside one another in real-time.
 
 **Documentation**
 
