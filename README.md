@@ -15,14 +15,14 @@ VMD's documentation is outputted to the browser console upon script load.
 
 **Usage**
 
-Open up dev tools and paste this into your console:  
-```javascript
-(function(d) { var vmd=d.createElement("script"); vmd.src="//julian.com/research/velocity/vmd.min.js"; d.body.appendChild(vmd); })(document);
-```
-
-Alternatively, add this to the bottom of your page:  
+Add this to the bottom of your page:  
 ```html
 <script src="//julian.com/research/velocity/vmd.min.js"></script>
+```
+
+Alternatively, open up dev tools and paste this into your console:  
+```javascript
+(function(d) { var vmd=d.createElement("script"); vmd.src="//julian.com/research/velocity/vmd.min.js"; d.body.appendChild(vmd); })(document);
 ```
 
 **Important**
