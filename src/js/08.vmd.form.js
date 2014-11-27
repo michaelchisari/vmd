@@ -95,16 +95,8 @@ $vmd.buildForm = function () {
     var vmdForm = ' \
         <div class="vmd-form" style="width:50%; min-width:1000px; margin-left:auto; margin-right:auto; position:absolute; top:50px; left: 60px;"> \
             <div class="ui top attached black block header"> \
-                <div class="ui three column grid"> \
-                    <div class="vmd-identifier gray aligned column"> \
-                            #identifier \
-                    </div> \
-                    <div class="center aligned column"> \
-                        <div class="small blue circular ui button" style="margin-top:-4px; box-shadow:2px 2px 4px rgba(0,0,0,0.6);">A</div> \
-                    </div> \
-                    <div class="right aligned column"> \
-                        <div class="ui circular button"><i class="setting icon"></i></div> \
-                    </div> \
+                <div class="vmd-identifier gray aligned"> \
+                        #identifier \
                 </div> \
             </div> \
             <div class="ui small attached form segment"> \
@@ -153,13 +145,11 @@ $vmd.buildForm = function () {
                     </div> \
               </div> \
             </div> \
-            <h5 class="ui small bottom attached black block header"> \
-                <div class="ui one column grid"> \
-                    <div class="vmd-identifier left floated right aligned gray column"> \
-                            #identifier \
-                    </div> \
+            <div class="ui small bottom attached black block header"> \
+                <div class="vmd-identifier gray "> \
+                        #identifier \
                 </div> \
-            </h5> \
+            </div> \
         </div> ';
 
     return (vmdForm);

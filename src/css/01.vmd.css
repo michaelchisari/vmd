@@ -55,7 +55,7 @@ div.ui-widget-handle {
 
 .vmd-identifier {
     font-family:Courier New;
-    font-size:11px;
+    font-size:12px !important;
     font-weight:bold;
 }
 
