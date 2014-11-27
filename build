@@ -1,0 +1,124 @@
+#!/bin/sh
+
+
+echo "Velocity Motion Designer Compiler v0.1 [11/23/2014]"
+
+command -v cleancss >/dev/null 2>&1 || { 
+    echo "\nI require cleancss but it's not installed. Install using:"
+    echo ""
+    echo "\t\tnpm install -g cleancss"
+    echo ""
+    exit 1
+}
+
+
+command -v uglifyjs >/dev/null 2>&1 || { 
+    echo "\nI require uglifyJS2 but it's not installed. Install using:"
+    echo ""
+    echo "\t\tnpm install -g uglify-js"
+    echo ""
+    exit 1
+}
+
+
+SRC="./src"
+DEST="./dist/vmd.js"
+
+
+CSS="$(find $SRC -type f | egrep ".css" )"
+JS="$(find $SRC -type f | egrep ".js" )"
+WOFF="$(find $SRC -type f | egrep ".woff" )"
+
+FILES=()
+DIRS=()
+
+declare -a FILES
+declare -a DIRS
+arr=("${arr[@]}" "newest")
+
+# Compile all found CSS files.
+for c in $CSS; do
+    DIRS=("${DIRS[@]}" ${c%/*})
+    FILES=("${FILES[@]}" ${c##*/})
+done
+
+# Compile all found JS files.
+for w in $WOFF; do
+    DIRS=("${DIRS[@]}" ${w%/*})
+    FILES=("${FILES[@]}" ${w##*/})
+done
+
+# Compile all found JS files.
+for j in $JS; do
+    DIRS=("${DIRS[@]}" ${j%/*})
+    FILES=("${FILES[@]}" ${j##*/})
+done
+
+# Sort
+# DIRS=($(printf '%s\n' "${DIRS[@]}"|sort|uniq))
+# FILES=($(printf '%s\n' "${FILES[@]}"|sort|uniq))
+
+OUTPUT="// FINAL"
+
+for d in ${!DIRS[@]}; do
+    FILE=${FILES[d]}
+    F=${DIRS[d]}/${FILES[d]}
+    E="${FILES[d]##*.}"
+
+    test "$E" == 'css' && {
+        CSS="$(cleancss --skip-advanced $F)"
+
+        # Escape
+        CSS="$(echo $CSS | sed 's/\"/\\\"/g')"
+
+        OUTPUT+="\n\n// "$FILE"\n"
+        OUTPUT+="\$(\"body\").append(\"<style>$CSS</style>\");";
+    }
+    test "$E" == 'js' && {
+        # Skip the development declaration file
+        test "$FILE" == "00.vmd.development.js" && {
+            continue;
+        }
+        JS="$(uglifyjs $F)"
+
+        OUTPUT+="\n\n// "$FILE"\n"
+        OUTPUT+=$JS
+    }
+    test "$E" == 'woff' && {
+        # Convert the woff file to base64
+        WOFF="$(base64 $F)"
+
+        # Use the file name as the font family name.
+        FAMILY=(${FILES[d]//./ })
+        fam=${FAMILY[1]}
+        c=0
+        for char in $(sed -E s/'(.)'/'\1 '/g <<<"$fam"); do
+            let "c++"
+            test "$c" == 1 && {
+                FAMILY="$(echo $char | tr [a-z] [A-Z])"
+                continue;
+            }
+            FAMILY+=$char
+        done
+
+        # Generate the font face output
+        WOFFDATA="@font-face {"
+            WOFFDATA+="font-family: '$FAMILY';"
+            WOFFDATA+="src: url('data:application/x-font-woff;base64,$WOFF');"
+            WOFFDATA+="font-style: normal;"
+            WOFFDATA+="font-weight: normal;"
+            WOFFDATA+="font-variant: normal;"
+            WOFFDATA+="text-decoration: inherit;"
+            WOFFDATA+="text-transform: none;"
+        WOFFDATA+="}"
+
+        # Escape
+        WOFFDATA="$(echo $WOFFDATA | sed 's/\"/\\\"/g')"
+
+        OUTPUT+="\n\n// "$FILE"\n"
+        OUTPUT+="\$(\"body\").append(\"<style>$WOFFDATA</style>\");";
+    }
+    
+done
+
+echo $OUTPUT > $DEST
