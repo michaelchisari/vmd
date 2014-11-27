@@ -124,7 +124,6 @@ $vmd.buildForm = function () {
                             <div class="item" data-value="translateY">translateY</div> \
                         </div> \
                     </div> \
-                    <div class="ui right floated small blue button"><i class="small edit icon"></i></div> \
                 </div> \
                 <div class="two wide column"> \
                     <div class="ui left icon mini input"> \
@@ -163,5 +162,5 @@ $vmd.buildForm = function () {
             </h5> \
         </div> ';
 
-        return (vmdForm);
+    return (vmdForm);
 }
