@@ -1,5 +1,9 @@
 $vmd.initialize = function () {
 
+    $vmd.loadLibraries();
+
+    $vmd.buildFunctions();
+
     /*************
         Setup
     *************/
@@ -44,7 +48,7 @@ $vmd.initialize = function () {
 
     $vmd.body.prepend(vmdToolbar);
 
-    console.log ($vmd.$("#vmd"));
+    console.log ($vmd);
     $vmd.$("#vmd").append($vmd.buildToolbar());
 
     // Allow the menubar to be vertically draggable, in case it covers elements 
@@ -156,18 +160,6 @@ $vmd.initialize = function () {
 
     console.log ("Load #2");
 
-}
-
-$vmd.loadJQuery();
-
-$(document).ready(function() {
-
-    $vmd.loadLibraries();
-
-    $vmd.buildFunctions();
-
-    $vmd.initialize();
-
     $vmd.enableOutlining();
 
-});
+}

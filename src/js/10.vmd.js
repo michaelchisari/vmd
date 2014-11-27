@@ -415,3 +415,10 @@ $vmd.enableOutlining = function() {
 
 }
 
+$vmd.loadJQuery();
+
+$(document).ready(function() {
+
+    $vmd.initialize();
+
+});
