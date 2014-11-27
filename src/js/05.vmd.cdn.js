@@ -7,7 +7,7 @@ $vmd.loadLibraries = function() {
             // Velocity UI JS
             $vmd.$.getScript($vmd._protocol + '//cdnjs.cloudflare.com/ajax/libs/velocity/1.1.0/velocity.ui.min.js', function() {
                 // Semantic-UI JS
-                $vmd.$.getScript($vmd._protocol + '//cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.0.0/components/accordion.min.js', function() {
+                $vmd.$.getScript($vmd._protocol + '//cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.0.0/semantic.min.js', function() {
                     // Semantic-UI CSS
                     $vmd.$.get($vmd._protocol + '//cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.0.0/semantic.css', function (css) {
 

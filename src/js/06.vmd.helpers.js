@@ -52,7 +52,7 @@ $vmd.buildFunctions = function() {
     };
 
     /* From: http://stackoverflow.com/questions/3169786/clear-text-selection-with-javascript */
-    function clearPageSelection() {
+    $vmd.clearPageSelection = function () {
         if (window.getSelection) {
           if (window.getSelection().empty) {  // Chrome
             window.getSelection().empty();

@@ -1,11 +1,13 @@
 $vmd.initialize = function () {
 
+    $vmd.buildFunctions();
+
     /*************
         Setup
     *************/
 
-    var alphabetIndex = 64,
-        propertiesMapDefault = '{ }';
+    $vmd.alphabetIndex = 64;
+    $vmd.propertiesMapDefault = '{ }';
 
     $vmd.body = $vmd.$("body");
 
@@ -44,10 +46,11 @@ $vmd.initialize = function () {
 
     $vmd.body.prepend(vmdToolbar);
 
-    $vmd.$("#vmd").append($vmd.buildToolbar());
+    $vmd.Toolbar = $vmd.$('#vmd');
+    $vmd.Toolbar.append($vmd.buildToolbar());
 
     // Allow the menubar to be vertically draggable, in case it covers elements 
-    $vmd.$("#vmd").draggable({"revert": false, "handle": "div.ui-widget-handle", "grid": [0, 1]});
+    $vmd.Toolbar.draggable({"revert": false, "handle": "div.ui-widget-handle", "grid": [0, 1]});
 
     /*
      * Create a list of Velocity css transforms.
@@ -130,9 +133,9 @@ $vmd.initialize = function () {
      */
     $vmd.systemFont = 'Helvetica Neue, Arial';
 
-    $vmd.$("#vmd").css('font-family', $vmd.systemFont, 'important');
+    $vmd.Toolbar.css('font-family', $vmd.systemFont, 'important');
 
-    $vmd.$("#vmd").show();
+    $vmd.Toolbar.show();
 
     /***************
        VMD Functions

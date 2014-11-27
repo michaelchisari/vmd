@@ -51,7 +51,7 @@
         /* Make links, buttons and inputs unclickable */
         $vmd.togglePageInputs(false);
 
-        var $toggle  = $vmd.$('#vmd-on-off.ui.toggle.button');
+        var $toggle  = $vmd.$('#vmd-on-off');
         $toggle
         .state({
             text: {
@@ -79,7 +79,7 @@
                 }
                 if (keys.length) keys.show();
                 
-                $vmd.velocity ({ opacity: 1 }, 750);
+                $vmd.Toolbar.velocity ({ opacity: 1 }, 750);
                 $vmd.active = true;
                 /* Make inputs unclickable */
                 $vmd.togglePageInputs (false);
@@ -87,7 +87,7 @@
                 /* Remove VMD from browser title */
                 document.title = document.title.slice(5, document.title.length);
                 $vmd.active = false;
-                $vmd.velocity ({ opacity: 0.35 }, 750);
+                $vmd.Toolbar.velocity ({ opacity: 0.35 }, 750);
                 if (buttons.length) {
                     buttons.prop('disabled', 'disabled');
                     $vmd.closeMenus();
@@ -105,7 +105,7 @@
         $vmd.$(".ui.vmd-element.button").each (function() {
             $vmd.$(this).removeClass("active");
         });
-        $vmd.find(".vmd-form").each (function() {
+        $vmd.$(".vmd-form").each (function() {
            $vmd.$(this).hide();
         });
     }
@@ -114,7 +114,7 @@
     $vmd.openMenu = function (target) {
         $vmd.$(target).addClass('active');
         var id = '.' + $vmd.$(target).attr('id');
-        $vmd.find(id).velocity({ opacity: 1 }, { display: "auto" });
+        $vmd.$(id).velocity({ opacity: 1 }, { display: "auto" });
     }
 
     /* Add functionality to elements. */
@@ -180,15 +180,15 @@
         /* Set everything with vmd class to use Helvetica Neue, Arial */
         $vmd.$(thisForm).find('.vmd').css('font-family', $vmd.systemFont, 'important');
 
-        var transforms = $vmd.$vmd.$.Velocity.Transforms;
+        var transforms = $vmd.$.Velocity.Transforms;
         for (t in transforms) {
             var html = '<div class="item">' + transforms[t] + '</div>';
             $vmd.$(thisForm).find('.ui.dropdown').find('.menu').append(html);
         }
 
-        $vmd.append(thisForm);
+        $vmd.Toolbar.append(thisForm);
         
-        $vmd.find('.ui.dropdown').dropdown();
+        $vmd.$('.ui.dropdown').dropdown();
 
         // Allow the menubar to be vertically draggable, in case it covers elements 
         $vmd.$(".vmd").find(".drag.ui.grid").draggable( {

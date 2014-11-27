@@ -9,20 +9,20 @@ $vmd.enableOutlining = function() {
             if (!$vmd.active) return (false);
 
             if (event.shiftKey) {
-                $(".vmd-outline").css("cursor", "pointer");
+                $vmd.$(".vmd-outline").css("cursor", "pointer");
             }
         })
         .keyup( function(event) {
             if (!$vmd.active) return (false);
 
             if (event.which === 16) {
-                $(".vmd-outline").css("cursor", "");
+                $vmd.$(".vmd-outline").css("cursor", "");
             }
         })
       .on("mouseover", function(event) {
             if (!$vmd.active) return (false);
 
-        var $target = $(event.target);
+        var $target = $vmd.$(event.target);
 
             // Ignore menu elements for element selection
             if (!$target.closest("#vmd").length) {
@@ -62,9 +62,9 @@ $vmd.enableOutlining = function() {
             return (false);
         }
 
-        clearPageSelection();
+        $vmd.clearPageSelection();
 
-      var $target = $(event.target),
+      var $target = $vmd.$(event.target),
         $overlay = $target.closest("overlay.VMD");
 
         /* Exclude any elements in the vmd toolbar */
@@ -82,15 +82,15 @@ $vmd.enableOutlining = function() {
            Initialization
         *******************/
 
-        alphabetIndex++;
+        $vmd.alphabetIndex++;
 
-            var alphabetLetter = String.fromCharCode(alphabetIndex);
+            var alphabetLetter = String.fromCharCode($vmd.alphabetIndex);
 
             $target.addClass("vmd-initialized");
             $target.data("vmd-button-letter", alphabetLetter);
 
         /* Properties Map */
-        $("<code></code>")
+        $vmd.$("<code></code>")
           .attr("name", "propertiesMap")
           .css({
             display: "none",
@@ -105,11 +105,11 @@ $vmd.enableOutlining = function() {
           })
           .prop("contenteditable", true)
           .prop("spellcheck", false)
-          .html(propertiesMapDefault)
+          .html($vmd.propertiesMapDefault)
           .appendTo($target);
 
         /* Key */
-        var $key = $("<span></span>");
+        var $key = $vmd.$("<span></span>");
         $key
           .attr("name", "key")
           .css({ 
@@ -128,7 +128,7 @@ $vmd.enableOutlining = function() {
             cursor: "default",
             userSelect: "none"
           })
-          .html(String.fromCharCode(alphabetIndex))
+          .html(String.fromCharCode($vmd.alphabetIndex))
                 .appendTo($target);
 
             //$target.append($key);
@@ -138,8 +138,8 @@ $vmd.enableOutlining = function() {
 
             var vmdButtonId = 'vmd-button-' + alphabetLetter;
             var vmdButton = '<button id="' + vmdButtonId + '" class="ui vmd-element button">A</button>';
-            vmdButton = $(vmdButton).html(alphabetLetter);
-            $("#vmd-ui-buttons").append (vmdButton);
+            vmdButton = $vmd.$(vmdButton).html(alphabetLetter);
+            $vmd.$("#vmd-ui-buttons").append (vmdButton);
 
             $vmd.updateButton(vmdButtonId, $target);
 
@@ -170,7 +170,7 @@ $vmd.enableOutlining = function() {
         ***********************/
 
         /* Container */
-        var $modal = $("<modal></modal>");
+        var $modal = $vmd.$("<modal></modal>");
         $modal.css({ 
           position: "absolute",
           left: "50%",
@@ -185,7 +185,7 @@ $vmd.enableOutlining = function() {
         });
 
         /* Key */
-        var $key = $("<span></span>");
+        var $key = $vmd.$("<span></span>");
         $key
           .attr("name", "key")
           .css({ 
@@ -203,11 +203,11 @@ $vmd.enableOutlining = function() {
             cursor: "default",
             userSelect: "none"
           })
-          .html(String.fromCharCode(alphabetIndex));
+          .html(String.fromCharCode($vmd.alphabetIndex));
 
 
         /* Label */
-        var $label = $("<div></div>");
+        var $label = $vmd.$("<div></div>");
         $label
           .html(getElementLabel($target))
           .css({
@@ -221,7 +221,7 @@ $vmd.enableOutlining = function() {
           .appendTo($modal);
 
         /* Properties Map */
-        $("<code></code>")
+        $vmd.$("<code></code>")
           .attr("name", "propertiesMap")
           .css({
             display: "block",
@@ -236,18 +236,18 @@ $vmd.enableOutlining = function() {
           })
           .prop("contenteditable", true)
           .prop("spellcheck", false)
-          .html(propertiesMapDefault)
+          .html($vmd.propertiesMapDefault)
           .appendTo($modal);
 
         /* Controls */
-        var $controls = $("<table></table>");
+        var $controls = $vmd.$("<table></table>");
         $controls
           .attr("name", "options")
           .appendTo($modal);
 
         /* Duration and delay */
         var $duration = 
-            $("<input type='range' />")
+            $vmd.$("<input type='range' />")
               .attr({ 
                 name: "duration",
                 min: "100",
@@ -266,7 +266,7 @@ $vmd.enableOutlining = function() {
               .appendTo($controls);
 
         var $delay = 
-            $("<input type='range' />")
+            $vmd.$("<input type='range' />")
               .attr({ 
                 name: "delay",
                 min: "0",
@@ -286,7 +286,7 @@ $vmd.enableOutlining = function() {
 
         /* Easing */
         var $easing = 
-            $("<select></select>")
+            $vmd.$("<select></select>")
               .attr("name", "easing")
               .css({
                 backgroundColor: "transparent",
@@ -298,7 +298,7 @@ $vmd.enableOutlining = function() {
               .parent();
 
         var $easingArray = 
-            $("<code></code>")
+            $vmd.$("<code></code>")
               .attr("name", "easingArray")
               .css({
                 display: "none",
@@ -322,7 +322,7 @@ $vmd.enableOutlining = function() {
           .parent()
           .appendTo($controls);
 
-        $("<option></option>")
+        $vmd.$("<option></option>")
           .attr({
             "data-array": "true",
             value: "[500,20]"
@@ -330,7 +330,7 @@ $vmd.enableOutlining = function() {
           .html("spring physics...")
           .appendTo($easing.children());
 
-        $("<option></option>")
+        $vmd.$("<option></option>")
           .attr({
             "data-array": "true",
             value: "[.25,1,.25,1]"
@@ -338,7 +338,7 @@ $vmd.enableOutlining = function() {
           .html("cubic bezier...")
           .appendTo($easing.children());
 
-        $("<option></option>")
+        $vmd.$("<option></option>")
           .attr({
             "data-array": "true",
             value: "[ 4 ]"
@@ -347,7 +347,7 @@ $vmd.enableOutlining = function() {
           .appendTo($easing.children());
 
         $.each($.Velocity.Easings, function(name) {
-          $("<option></option>")
+          $vmd.$("<option></option>")
             .attr({
               name: name,
               value: name
@@ -360,8 +360,8 @@ $vmd.enableOutlining = function() {
         });
 
         /* Overlay insertion. */
-        var $overlay = $("<overlay></overlay>")
-            .attr("id", "overlay-" + alphabetIndex)
+        var $overlay = $vmd.$("<overlay></overlay>")
+            .attr("id", "overlay-" + $vmd.alphabetIndex)
             .css({
               width: "100%",
               left: "100%",
@@ -384,19 +384,19 @@ $vmd.enableOutlining = function() {
                     clearElementStyles(element);
                   });
 
-                  $(this).find("overlay.VMD code[name='propertiesMap']")
+                  $vmd.$(this).find("overlay.VMD code[name='propertiesMap']")
                     .velocity("stop", true)
                     .velocity({ color: INDICATOR_COLOR }, 75)
                     .velocity("reverse");
                 },
                 complete: function(elements) {
-                  var $this = $(this),
+                  var $this = $vmd.$(this),
                     propertiesMap = $this.find("overlay.VMD").data("VMD").propertiesMap,
                     options = $this.find("overlay.VMD").data("VMD").options;
 
                   if (options.loop === true && typeof propertiesMap === "string") {
                     $.each(elements, function(i, element) {
-                      $(this).velocity(propertiesMap, options);
+                      $vmd.$(this).velocity(propertiesMap, options);
                     });
                   }
                 }
