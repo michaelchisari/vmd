@@ -1,5 +1,5 @@
-    /*  Build Menu */
-    $vmd.buildMenu = function() {
+    /*  Build Toolbar */
+    $vmd.buildToolbar = function() {
 
         var vmdOnOff = '';
             vmdOnOff += '  <div id="vmd-logo" class="ui mini label">VMD</div>';

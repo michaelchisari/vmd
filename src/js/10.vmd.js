@@ -1,4 +1,4 @@
-$(document).ready(function (){
+$vmd.enableOutlining = function() {
 
     /*****************
         Outlining
@@ -413,4 +413,5 @@ $(document).ready(function (){
       }
     });
 
-});
+}
+

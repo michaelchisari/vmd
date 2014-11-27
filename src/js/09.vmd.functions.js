@@ -103,15 +103,6 @@
       .ready($vmd.createToggle)
     ;
 
-    /**************
-        Init
-    **************/
-
-    $vmd.append($vmd.buildMenu());
-
-    // Allow the menubar to be vertically draggable, in case it covers elements 
-    $("#vmd").draggable({"revert": false, "handle": "div.ui-widget-handle", "grid": [0, 1]});
-
     /* Close all open menus */
     $vmd.closeMenus = function() {
         // Un-select all element buttons

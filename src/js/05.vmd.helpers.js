@@ -1,63 +1,67 @@
 /***********************
-    Helper Functions
+Helper Functions
 ***********************/
 
-function objectToString (variable) {
-    var properties = [];
+$vmd.buildFunctions = function() {
 
-    for (var property in variable) {
-    	var value = variable[property];
+    function objectToString (variable) {
+        var properties = [];
 
-    	if (Array.isArray(value)) {
-    		value = "[" + value + "]";
-    	} else if (!/^[0-9]+$/.test(value)) {
-			value = '"' + value + '"';
-		}
-        
-        properties.push(property + ": " + value);
-    }
+        for (var property in variable) {
+            var value = variable[property];
 
-    return "{ " + properties.join(", ") + " }";
-}
-
-/* From: http://stackoverflow.com/questions/2068272/getting-a-jquery-selector-for-an-element */
-$.fn.getPath = function () {
-    if (this.length != 1) throw 'Requires one element.';
-
-    var path, node = this;
-    while (node.length) {
-        var realNode = node[0], name = realNode.localName;
-        if (!name) break;
-        name = name.toLowerCase();
-
-        if (node.attr('id')) {
-            name = '#' + node.attr('id');
+            if (Array.isArray(value)) {
+                value = "[" + value + "]";
+            } else if (!/^[0-9]+$/.test(value)) {
+                value = '"' + value + '"';
+            }
+            
+            properties.push(property + ": " + value);
         }
 
-        var parent = node.parent();
+        return "{ " + properties.join(", ") + " }";
+    }
 
-        var siblings = parent.children(name);
-        if (siblings.length > 1) { 
-            name += ':eq(' + siblings.index(realNode) + ')';
+    /* From: http://stackoverflow.com/questions/2068272/getting-a-jquery-selector-for-an-element */
+    $vmd.$.fn.getPath = function () {
+        if (this.length != 1) throw 'Requires one element.';
+
+        var path, node = this;
+        while (node.length) {
+            var realNode = node[0], name = realNode.localName;
+            if (!name) break;
+            name = name.toLowerCase();
+
+            if (node.attr('id')) {
+                name = '#' + node.attr('id');
+            }
+
+            var parent = node.parent();
+
+            var siblings = parent.children(name);
+            if (siblings.length > 1) { 
+                name += ':eq(' + siblings.index(realNode) + ')';
+            }
+
+            path = name + (path ? ' > ' + path : '');
+
+            node = parent;
         }
 
-        path = name + (path ? ' > ' + path : '');
+        return path;
+    };
 
-        node = parent;
+    /* From: http://stackoverflow.com/questions/3169786/clear-text-selection-with-javascript */
+    function clearPageSelection() {
+        if (window.getSelection) {
+          if (window.getSelection().empty) {  // Chrome
+            window.getSelection().empty();
+          } else if (window.getSelection().removeAllRanges) {  // Firefox
+            window.getSelection().removeAllRanges();
+          }
+        } else if (document.selection) {  // IE?
+          document.selection.empty();
+        }
     }
 
-    return path;
-};
-
-/* From: http://stackoverflow.com/questions/3169786/clear-text-selection-with-javascript */
-function clearPageSelection() {
-    if (window.getSelection) {
-      if (window.getSelection().empty) {  // Chrome
-        window.getSelection().empty();
-      } else if (window.getSelection().removeAllRanges) {  // Firefox
-        window.getSelection().removeAllRanges();
-      }
-    } else if (document.selection) {  // IE?
-      document.selection.empty();
-    }
 }

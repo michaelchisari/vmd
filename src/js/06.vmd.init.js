@@ -1,3 +1,5 @@
+$vmd.initialize = function () {
+
     /*************
         Setup
     *************/
@@ -5,15 +7,13 @@
     var alphabetIndex = 64,
         propertiesMapDefault = '{ }';
 
-    var $body = $("body");
+    $vmd.body = $vmd.$("body");
 
     var VERSION = "1.1.0-rc1",
         INDICATOR_COLOR = "#82E682",
         DURATION_DEFAULT = 800,
         EASING_DEFAULT = "swing",
         DELAY_DEFAULT = 0;
-
-     var $vmd = $("#vmd");
 
     /*********************
         Notifications
@@ -33,17 +33,28 @@
             " - Esc key: Close visible modal."
         ];
 
-    $.each(instructions, function(i, instruction) {
+    $vmd.$.each(instructions, function(i, instruction) {
         console.log(instruction);
     });
 
     document.title = "VMD | " + document.title;
 
+    var vmdToolbar  = '<div id="vmd" class="ui menu">';
+    vmdToolbar += '</div>';
+
+    $vmd.body.prepend(vmdToolbar);
+
+    console.log ($vmd.$("#vmd"));
+    $vmd.$("#vmd").append($vmd.buildToolbar());
+
+    // Allow the menubar to be vertically draggable, in case it covers elements 
+    $("#vmd").draggable({"revert": false, "handle": "div.ui-widget-handle", "grid": [0, 1]});
+
     /*
      * Create a list of Velocity css transforms.
      */
 
-    $.Velocity.Transforms = {
+    $vmd.$.Velocity.Transforms = {
 
         'opacity': 'opacity',
         'width': 'width',
@@ -144,3 +155,19 @@
     }
 
     console.log ("Load #2");
+
+}
+
+$vmd.loadJQuery();
+
+$(document).ready(function() {
+
+    $vmd.loadLibraries();
+
+    $vmd.buildFunctions();
+
+    $vmd.initialize();
+
+    $vmd.enableOutlining();
+
+});

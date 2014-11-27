@@ -1,21 +1,20 @@
-$cdn = new Object;
-
-$cdn.load = function() {
+$vmd.loadLibraries = function() {
 
     // JQuery UI
-    $.getScript(__vmd_protocol + '//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js');
+    $vmd.$.getScript(__vmd_protocol + '//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js');
 
     // Velocity JS
-    $.getScript(__vmd_protocol + '//cdnjs.cloudflare.com/ajax/libs/velocity/1.1.0/velocity.min.js', function() {
+    $vmd.$.getScript(__vmd_protocol + '//cdnjs.cloudflare.com/ajax/libs/velocity/1.1.0/velocity.min.js', function() {
         // Velocity UI JS
-        $.getScript(__vmd_protocol + '//cdnjs.cloudflare.com/ajax/libs/velocity/1.1.0/velocity.ui.min.js');
+        $vmd.$.getScript(__vmd_protocol + '//cdnjs.cloudflare.com/ajax/libs/velocity/1.1.0/velocity.ui.min.js', function() {
+        });
     });
 
     // Semantic-UI JS
-    $.getScript(__vmd_protocol + '//cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.0.0/components/accordion.min.js');
+    $vmd.$.getScript(__vmd_protocol + '//cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.0.0/components/accordion.min.js');
 
     // Semantic-UI CSS
-    $.get(__vmd_protocol + '//cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.0.0/semantic.css', function (css) {
+    $vmd.$.get(__vmd_protocol + '//cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.0.0/semantic.css', function (css) {
 
         // Necessary because Semantic-UI resets the body/page html.  Don't want to do that for a bookmarklet.
         var splitted = css.split(__vmd_linebreak); // \n
@@ -26,8 +25,8 @@ $cdn.load = function() {
             }
         }
         var semantic_css = splitted.join(__vmd_linebreak);
-        $(document).ready(function() {
-            $('<style />').html(semantic_css).appendTo('head');
+        $vmd.$(document).ready(function() {
+            $vmd.$('<style />').html(semantic_css).appendTo('head');
         });
 
     });
@@ -38,10 +37,10 @@ $cdn.load = function() {
 // anders.tornblad@gmail.com
 
 // Anonymous "self-invoking" function
-(function() {
+$vmd.loadJQuery = function () {
     // Load the script
     var script = document.createElement("SCRIPT");
-    script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js';
+    script.src = __vmd_protocol + '//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js';
     script.type = 'text/javascript';
     document.getElementsByTagName("head")[0].appendChild(script);
 
@@ -58,7 +57,8 @@ $cdn.load = function() {
     // Start polling...
     checkReady(function($) {
         $(function() {
-            $cdn.load();
+            $vmd.jQuery = $vmd.$ = $.noConflict(true);
+            $vmd.loadLibraries();
         });
     });
-})();
+};

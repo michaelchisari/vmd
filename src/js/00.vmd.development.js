@@ -3,3 +3,5 @@
 __vmd_linebreak = '\n';
 
 __vmd_protocol = 'http:';
+
+$vmd = new Object;
