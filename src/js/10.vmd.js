@@ -4,7 +4,7 @@ $vmd.enableOutlining = function() {
         Outlining
     *****************/
 
-    $body
+    $vmd.body
         .keydown( function(event) {
             if (!$vmd.active) return (false);
 
@@ -40,15 +40,15 @@ $vmd.enableOutlining = function() {
       .on("mouseout", function(event) {
         //$(event.target).css("outline", "");
             //$(event.target).removeClass("vmd-outline");
-            $(event.target).css("outline", "");
-            $(event.target).css("cursor", "");
+            $vmd.$(event.target).css("outline", "");
+            $vmd.$(event.target).css("cursor", "");
       });
 
     /***************
         Overlay
     ***************/
 
-    $body.click(function(event) {
+    $vmd.body.click(function(event) {
 
         /* If VMD isn't active, return true and follow links and buttons */
         if (!$vmd.active) 
@@ -415,10 +415,7 @@ $vmd.enableOutlining = function() {
 
 }
 
-$vmd.loadJQuery();
-
-$(document).ready(function() {
-
-    $vmd.initialize();
-
-});
+/*
+ * Prepare the VMD subsystem.
+ */
+$vmd.prep();

@@ -99,10 +99,6 @@
         });
     };
 
-    $vmd.$(document)
-      .ready($vmd.createToggle)
-    ;
-
     /* Close all open menus */
     $vmd.closeMenus = function() {
         // Un-select all element buttons
@@ -184,7 +180,7 @@
         /* Set everything with vmd class to use Helvetica Neue, Arial */
         $vmd.$(thisForm).find('.vmd').css('font-family', $vmd.systemFont, 'important');
 
-        var transforms = $.Velocity.Transforms;
+        var transforms = $vmd.$vmd.$.Velocity.Transforms;
         for (t in transforms) {
             var html = '<div class="item">' + transforms[t] + '</div>';
             $vmd.$(thisForm).find('.ui.dropdown').find('.menu').append(html);
@@ -219,7 +215,7 @@
       var propertiesMap = $overlay.data("VMD").propertiesMap,
         options = $overlay.data("VMD").options;
 
-      $.each([ "duration", "delay", "easing" ], function(_, value) {
+      $vmd.$.each([ "duration", "delay", "easing" ], function(_, value) {
         options[value] = $overlay.find("[name='" + value + "']").val();
       });
 
@@ -249,10 +245,10 @@
     }
 
     function clearElementStyles (element) {
-      if ($.data(element, "velocity")) {
-        $.data(element, "velocity").transformCache = {};
+      if ($vmd.$.data(element, "velocity")) {
+        $vmd.$.data(element, "velocity").transformCache = {};
       }
 
       /* Assumes the user isn't setting any inline styles. */
-      element.setAttribute("style", "position:" + $.css(element, "position") + ";");
+      element.setAttribute("style", "position:" + $vmd.$.css(element, "position") + ";");
     }

@@ -1,9 +1,5 @@
 $vmd.initialize = function () {
 
-    $vmd.loadLibraries();
-
-    $vmd.buildFunctions();
-
     /*************
         Setup
     *************/
@@ -48,11 +44,10 @@ $vmd.initialize = function () {
 
     $vmd.body.prepend(vmdToolbar);
 
-    console.log ($vmd);
     $vmd.$("#vmd").append($vmd.buildToolbar());
 
     // Allow the menubar to be vertically draggable, in case it covers elements 
-    $("#vmd").draggable({"revert": false, "handle": "div.ui-widget-handle", "grid": [0, 1]});
+    $vmd.$("#vmd").draggable({"revert": false, "handle": "div.ui-widget-handle", "grid": [0, 1]});
 
     /*
      * Create a list of Velocity css transforms.
@@ -133,14 +128,11 @@ $vmd.initialize = function () {
     /*
      * Create the VMD toolbar 
      */
-    var vmdToolbar  = '<div id="vmd" class="ui menu">';
-        vmdToolbar += '</div>';
-
-    $("body").prepend(vmdToolbar);
-
     $vmd.systemFont = 'Helvetica Neue, Arial';
 
-    $vmd.css('font-family', $vmd.systemFont, 'important');
+    $vmd.$("#vmd").css('font-family', $vmd.systemFont, 'important');
+
+    $vmd.$("#vmd").show();
 
     /***************
        VMD Functions
@@ -153,13 +145,12 @@ $vmd.initialize = function () {
         var menuId = '#vmd-button-' + $target.data("vmd-button-letter");
         $vmd.closeMenus();
 
-        $vmd.openMenu ($(menuId));
+        $vmd.openMenu ($vmd.$(menuId));
         
         return (true);
     }
 
-    console.log ("Load #2");
-
     $vmd.enableOutlining();
 
+    $vmd.createToggle();
 }

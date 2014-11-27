@@ -1,7 +1,7 @@
 // Put any variables for production in here.
 
-__vmd_linebreak = '\\n';
-
-__vmd_protocol = '';
-
 $vmd = new Object;
+
+$vmd._linebreak = '\\n';
+
+$vmd._protocol = '';
