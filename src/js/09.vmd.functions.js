@@ -188,15 +188,9 @@
 
         $vmd.$('.ui.dropdown').dropdown();
 
-        // Allow the menubar to be vertically draggable, in case it covers elements 
-        $vmd.$(".vmd").find(".drag.ui.grid").draggable( {
-            "revert": true, 
-            "handle": ".small.lightgray.rotated.content.icon",
-            "grid": [0,1]
-        });
-
-        $vmd.$(".vmd").draggable( {
-            "handle": ".small.blue.circular.ui.button"
+        $vmd.$(".vmd-form").draggable( {
+            "handle": ".vmd-form-handle",
+            "cursor": "move"
         });
 
     }

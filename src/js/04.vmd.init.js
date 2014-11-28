@@ -50,7 +50,7 @@ $vmd.initialize = function () {
     $vmd.Toolbar.append($vmd.buildToolbar());
 
     // Allow the menubar to be vertically draggable, in case it covers elements 
-    $vmd.Toolbar.draggable({"revert": false, "handle": "div.ui-widget-handle", "grid": [0, 1]});
+    $vmd.Toolbar.draggable({"revert": false, "handle": "div.ui-widget-handle", "cursor": "move", "grid": [0, 1]});
 
     /*
      * Create a list of Velocity css transforms.
