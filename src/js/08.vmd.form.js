@@ -125,7 +125,9 @@ $vmd.buildForm = function () {
         vmdForm += '        </div>';
         vmdForm += '        <div class="field">';
         vmdForm += '            <label>Easing Data</label>';
-        vmdForm += '            <input type="text" name="easing-data" />';
+        vmdForm += '            <div class="ui mini input">';
+        vmdForm += '                <input type="text" name="easing-data" />';
+        vmdForm += '            </div>';
         vmdForm += '        </div>';
         vmdForm += '      </div>';
         vmdForm += '    </div>';

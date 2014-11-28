@@ -4,7 +4,7 @@
     top:0;
     left:0;
     opacity:0.95;
-    z-index:1000;
+    z-index:2;
 }
 
 #vmd .vmd-toolbar {
@@ -13,6 +13,7 @@
     box-shadow:0 4px 8px rgba(0,0,0,0.4);
     padding:2px 0 1px 1px;
     height:30px;
+    z-index:1000;
 }
 
 #vmd-snaptarget {
@@ -72,7 +73,7 @@ div.ui-widget-handle {
 }
 
 .vmd-form {
-    position:relative !important;
+    position:fixed !important;
     width:600px !important;
-    top:-10px !important;
+    top:40px !important;
 }
