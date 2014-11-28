@@ -152,5 +152,48 @@ $vmd.buildForm = function () {
             </div> \
         </div> ';
 
+    var vmdForm = ' \
+        <div class="ui vmd-form raised segment"> \
+            <div class="ui top attached black block header segment"> \
+                <div class="ui two column grid"> \
+                    <div class="ui vmd-identifier column">.vmd-identifier</div> \
+                    <div class="ui right aligned column"> \
+                        <div class="ui mini circular blue button">A</div> \
+                    </div> \
+                </div> \
+            </div> \
+            <div class="ui fluid attached form segment"> \
+              <div class="field"> \
+                  <label>Transition</label> \
+                  <textarea class="inverted" name="transition" placeholder="Transition"></textarea> \
+              </div> \
+              <div class="four fields"> \
+                <div class="field"> \
+                    <label>Duration: <b>1500ms</b></label> \
+                    <input type="range" name="duration" /> \
+                </div> \
+                <div class="field"> \
+                    <label>Delay: <b>500ms</b></label> \
+                    <input type="range" name="delay" /> \
+                </div> \
+                <div class="field"> \
+                    <label>Easing:</label> \
+                    <select name="easing"> \
+                        <option name="ease-in-out">ease-in-out</option> \
+                    </select> \
+                </div> \
+                <div class="field"> \
+                    <label>Easing Data</label> \
+                    <input type="text" name="easing-data" /> \
+                </div> \
+              </div> \
+            </div> \
+            <div class="ui bottom attached black block header segment"> \
+                <div class="ui two column grid"> \
+                    <div class="ui vmd-identifier right aligned right floated column">.vmd-identifier</div> \
+                </div> \
+            </div> \
+        </div>';
+
     return (vmdForm);
 }
