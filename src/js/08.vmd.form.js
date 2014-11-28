@@ -153,7 +153,7 @@ $vmd.buildForm = function () {
         </div> ';
 
     var vmdForm = ' \
-        <div class="ui vmd-form raised segment"> \
+        <div class="ui vmd-form raised blue segment"> \
             <div class="ui top attached black block header segment"> \
                 <div class="ui two column grid"> \
                     <div class="ui vmd-identifier column">.vmd-identifier</div> \
@@ -165,7 +165,7 @@ $vmd.buildForm = function () {
             <div class="ui fluid attached form segment"> \
               <div class="field"> \
                   <label>Transition</label> \
-                  <textarea class="inverted" name="transition" placeholder="Transition"></textarea> \
+                  <textarea name="transition" placeholder="Transition"></textarea> \
               </div> \
               <div class="four fields"> \
                 <div class="field"> \
@@ -194,6 +194,53 @@ $vmd.buildForm = function () {
                 </div> \
             </div> \
         </div>';
+
+var vmdForm = '';
+    vmdForm += '<div class="vmd-form">';
+    vmdForm += '';
+    vmdForm += '    <div class="ui top attached black block header segment">';
+    vmdForm += '        <div class="ui two column grid">';
+    vmdForm += '            <div class="vmd-identifier ui column">.vmd-identifier</div>';
+    vmdForm += '            <div class="ui right aligned column">';
+    vmdForm += '                <div class="ui mini circular blue button">A</div>';
+    vmdForm += '            </div>';
+    vmdForm += '        </div>';
+    vmdForm += '    </div>';
+    vmdForm += '    ';
+    vmdForm += '    <div class="ui fluid attached form segment">';
+    vmdForm += '      <div class="field">';
+    vmdForm += '          <label>Transition</label>';
+    vmdForm += '          <textarea class="inverted" name="transition" placeholder="Transition"></textarea>';
+    vmdForm += '      </div>';
+    vmdForm += '      <div class="four fields">';
+    vmdForm += '        <div class="field">';
+    vmdForm += '            <label>Duration: <b>1500ms</b></label>';
+    vmdForm += '            <input type="range" name="duration" />';
+    vmdForm += '        </div>';
+    vmdForm += '        <div class="field">';
+    vmdForm += '            <label>Delay: <b>500ms</b></label>';
+    vmdForm += '            <input type="range" name="delay" />';
+    vmdForm += '        </div>';
+    vmdForm += '        <div class="field">';
+    vmdForm += '            <label>Easing:</label>';
+    vmdForm += '            <select name="easing">';
+    vmdForm += '                <option name="ease-in-out">ease-in-out</option>';
+    vmdForm += '            </select>';
+    vmdForm += '        </div>';
+    vmdForm += '        <div class="field">';
+    vmdForm += '            <label>Easing Data</label>';
+    vmdForm += '            <input type="text" name="easing-data" />';
+    vmdForm += '        </div>';
+    vmdForm += '      </div>';
+    vmdForm += '    </div>';
+    vmdForm += '';
+    vmdForm += '    <div class="ui bottom attached black block header segment">';
+    vmdForm += '        <div class="ui two column grid">';
+    vmdForm += '            <div class="ui vmd-identifier right aligned right floated column">.vmd-identifier</div>';
+    vmdForm += '        </div>';
+    vmdForm += '    </div>';
+    vmdForm += '    ';
+    vmdForm += '</div>';
 
     return (vmdForm);
 }

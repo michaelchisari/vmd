@@ -147,6 +147,7 @@
 
     /* Create the element form underneath the button. */
     $vmd.createForm = function (target, targetElement) {
+        
         var thisForm = $vmd.$($vmd.buildForm());
         // Get the jquery path to the element
         var offset = $vmd.$(target).offset();
@@ -177,9 +178,6 @@
             $vmd.$('.' + targetId).find('.vmd-edit-modal').modal('show');
         });
 
-        /* Set everything with vmd class to use Helvetica Neue, Arial */
-        $vmd.$(thisForm).find('.vmd').css('font-family', $vmd.systemFont, 'important');
-
         var transforms = $vmd.$.Velocity.Transforms;
         for (t in transforms) {
             var html = '<div class="item">' + transforms[t] + '</div>';
@@ -187,7 +185,7 @@
         }
 
         $vmd.Toolbar.append(thisForm);
-        
+
         $vmd.$('.ui.dropdown').dropdown();
 
         // Allow the menubar to be vertically draggable, in case it covers elements 

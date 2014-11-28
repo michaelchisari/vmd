@@ -41,7 +41,7 @@ $vmd.initialize = function () {
 
     document.title = "VMD | " + document.title;
 
-    var vmdToolbar  = '<div id="vmd" class="ui menu">';
+    var vmdToolbar  = '<div id="vmd">';
     vmdToolbar += '</div>';
 
     $vmd.body.prepend(vmdToolbar);
