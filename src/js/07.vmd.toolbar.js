@@ -25,7 +25,7 @@ $vmd.buildToolbar = function() {
         vmdMenu += '<div class="vmd-toolbar ui fitted segment">';
         vmdMenu += '    <div class="ui two column grid">';
         vmdMenu += '        <div class="left floated column">';
-        vmdMenu += '            <div class="ui mini label ui-widget-handle">|||</div>';
+        vmdMenu += '            <div class="ui mini label vmd-toolbar-handle">|||</div>';
         vmdMenu += '            <div id="vmd-logo" class="ui mini label">VMD</div>';
         vmdMenu += '            <div id="vmd-on-off" class="ui mini circular toggle button">Off</div>';
         vmdMenu += '            <div id="vmd-ui-buttons" class="mini attached ui buttons"></div>';

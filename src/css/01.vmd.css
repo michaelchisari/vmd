@@ -77,3 +77,7 @@ div.ui-widget-handle {
     width:600px !important;
     top:40px !important;
 }
+
+.vmd-toolbar-handle {
+    background:none !important;
+}
