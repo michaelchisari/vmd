@@ -178,13 +178,24 @@
         var easings = $vmd.$.Velocity.Easings;
         for (e in easings) {
             var selected = '';
-            if (e === "ease") {
-                alert (e);
+            if (e === $vmd.EASING_DEFAULT) {
                 selected = 'selected';
             }
             var html = '<option ' + selected + ' value="' + e + '">' + e + '</option>';
             $vmd.$(thisForm).find('.vmd-easing-dropdown').append(html);
         }
+
+        /***************
+        Update Delay
+        ***************/
+
+        $vmd.$(thisForm).find("input[name='delay']").on ("input", function() {
+            $vmd.$(this).parent().find('.vmd-delay-amount').text(this.value);
+        });
+
+        $vmd.$(thisForm).find("input[name='duration']").on ("input", function() {
+            $vmd.$(this).parent().find('.vmd-duration-amount').text(this.value);
+        });
 
         $vmd.Toolbar.append(thisForm);
 

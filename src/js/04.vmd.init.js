@@ -11,18 +11,18 @@ $vmd.initialize = function () {
 
     $vmd.body = $vmd.$("body");
 
-    var VERSION = "1.1.0-rc1",
-        INDICATOR_COLOR = "#82E682",
-        DURATION_DEFAULT = 800,
-        EASING_DEFAULT = "swing",
-        DELAY_DEFAULT = 0;
+    $vmd.VERSION = "1.1.0-rc1";
+    $vmd.INDICATOR_COLOR = "#82E682";
+    $vmd.DURATION_DEFAULT = 800;
+    $vmd.EASING_DEFAULT = "swing";
+    $vmd.DELAY_DEFAULT = 0;
 
     /*********************
         Notifications
     *********************/
 
     var instructions = [
-            "Velocity Motion Designer " + VERSION + ". http://VelocityJS.org",
+            "Velocity Motion Designer " + $vmd.VERSION + ". http://VelocityJS.org",
             " * Note: All HREF links are disabled.",
             " * Note: Refer to \"CSS Support\" on http://VelocityJS.org for supported properties.",
             " * Note: You have access to all UI pack effects: http://VelocityJS.org/#uiPack.",

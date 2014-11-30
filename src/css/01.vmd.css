@@ -81,3 +81,13 @@ div.ui-widget-handle {
 .vmd-toolbar-handle {
     background:none !important;
 }
+
+input[name="easing-data"], 
+input[name="transition"] {
+    font-family:"Courier New" !important;
+    font-weight:bold;
+}
+
+.vmd-easing-data {
+    display:none !important;
+}

@@ -44,6 +44,7 @@ $vmd.enableOutlining = function() {
             $vmd.$(event.target).css("cursor", "");
       });
 
+
     /***************
         Overlay
     ***************/
@@ -353,7 +354,7 @@ $vmd.enableOutlining = function() {
               value: name
             })
             .prop({
-              selected: (name === EASING_DEFAULT)
+              selected: (name === $vmd.EASING_DEFAULT)
             })
             .html(name)
             .appendTo($easing.children());
@@ -375,9 +376,9 @@ $vmd.enableOutlining = function() {
               mouse: "enter",
               propertiesMap: {},
               options: {
-                duration: DURATION_DEFAULT,
-                delay: DELAY_DEFAULT,
-                easing: EASING_DEFAULT,
+                duration: $vmd.DURATION_DEFAULT,
+                delay: $vmd.DELAY_DEFAULT,
+                easing: $vmd.EASING_DEFAULT,
                 loop: false,
                 begin: function(elements) {
                   $.each(elements, function(i, element) {
@@ -386,7 +387,7 @@ $vmd.enableOutlining = function() {
 
                   $vmd.$(this).find("overlay.VMD code[name='propertiesMap']")
                     .velocity("stop", true)
-                    .velocity({ color: INDICATOR_COLOR }, 75)
+                    .velocity({ color: $vmd.INDICATOR_COLOR }, 75)
                     .velocity("reverse");
                 },
                 complete: function(elements) {
