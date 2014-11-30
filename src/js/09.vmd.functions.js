@@ -185,18 +185,45 @@
             $vmd.$(thisForm).find('.vmd-easing-dropdown').append(html);
         }
 
-        /***************
-        Update Delay
-        ***************/
-
+        // Update delay range slider
         $vmd.$(thisForm).find("input[name='delay']").on ("input", function() {
             $vmd.$(this).parent().find('.vmd-delay-amount').text(this.value);
         });
 
+        // Update duration range slider
         $vmd.$(thisForm).find("input[name='duration']").on ("input", function() {
             $vmd.$(this).parent().find('.vmd-duration-amount').text(this.value);
         });
 
+        // Set the current target.
+        $vmd.Targets[$vmd.alphabetIndex] = targetElement;
+
+        // Initialize the target's default values.
+        $vmd.Targets[$vmd.alphabetIndex].Repeat = false;
+        $vmd.Targets[$vmd.alphabetIndex].Properties = '{}';
+        $vmd.Targets[$vmd.alphabetIndex].Easing = $vmd.DEFAULT_EASING;
+        $vmd.Targets[$vmd.alphabetIndex].Delay = $vmd.DEFAULT_DELAY;
+        $vmd.Targets[$vmd.alphabetIndex].Duration = $vmd.DEFAULT_DURATION;
+
+        // Attach the target element index to the repeat icon
+        $vmd.$(thisForm).find(".vmd-repeat-icon").data('target-element', $vmd.alphabetIndex);
+
+        // Attach the index to the target element
+        targetElement.data('vmd-index', $vmd.alphabetIndex);
+
+        // Initialize the repeat button's behavior
+        $vmd.$(thisForm).find(".vmd-repeat-icon").popup();
+        $vmd.$(thisForm).find(".vmd-repeat-icon").click ( function() {
+            var target = $vmd.$(this).data('target-element');
+            $vmd.$(this).toggleClass("lightgray");
+            if ($vmd.$(this).hasClass("lightgray")) {
+                $vmd.Targets[target].Repeat = false;
+            } else {
+                $vmd.Targets[target].Repeat = true;
+            }
+        });
+
+        // Append the form to the #vmd toolbar element.
         $vmd.Toolbar.append(thisForm);
 
         $vmd.$('.ui.dropdown').dropdown("set selected", "swing");
@@ -205,7 +232,6 @@
             "handle": ".vmd-form-handle",
             "cursor": "move"
         });
-
     }
 
     /*****************
@@ -216,37 +242,41 @@
       return $target.attr("id") ? ("#" + $target.attr("id")) : ($target[0].tagName.toLowerCase() + ($target[0].className ? "." + $target[0].className : ""))
     }
 
-    function updateParameters ($overlay) {
-      var propertiesMap = $overlay.data("VMD").propertiesMap,
-        options = $overlay.data("VMD").options;
+    function updateParameters ($target) {
+      var propertiesMap = $target.data("VMD").propertiesMap,
+        options = $target.data("VMD").options;
 
       $vmd.$.each([ "duration", "delay", "easing" ], function(_, value) {
-        options[value] = $overlay.find("[name='" + value + "']").val();
+        options[value] = $target.find("[name='" + value + "']").val();
       });
 
-      if ($overlay.find("select[name='easing'] :selected").attr("data-array")) {
+      if ($target.find("select[name='easing'] :selected").attr("data-array")) {
           try {
-              eval("options.easing = " + $overlay.find("code[name='easingArray']").text());
+              eval("options.easing = " + $target.find("code[name='easingArray']").text());
         } catch (error) {} 	
       }
 
-      $overlay.data("VMD").options = options;
+      $target.data("VMD").options = options;
 
       try {
-        eval("propertiesMap = " + $overlay.find("code[name='propertiesMap']").text());
+        eval("propertiesMap = " + $target.find("code[name='propertiesMap']").text());
       } catch (error) { }
 
-      $overlay.data("VMD").propertiesMap = propertiesMap;
+      $target.data("VMD").propertiesMap = propertiesMap;
     }
 
-    function animate ($overlay) {
-      updateParameters($overlay);
+    function animate ($target) {
+      updateParameters($target);
 
-      if ($overlay.data("VMD").propertiesMap) {
-        $overlay.parent()
+      $vmd.Toolbar.velocity ({ opacity: 0.05, translateX: -1000 }, 100);
+
+      if ($target.data("VMD").propertiesMap) {
+        $target.parent()
           .velocity("stop", true)
-          .velocity($overlay.data("VMD").propertiesMap, $overlay.data("VMD").options);	
+          .velocity($target.data("VMD").propertiesMap, $target.data("VMD").options);	
       }
+
+      $vmd.Toolbar.velocity ({ opacity: 0.95, translateX: 0 }, 100);
     }
 
     function clearElementStyles (element) {

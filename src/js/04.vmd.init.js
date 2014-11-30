@@ -49,6 +49,8 @@ $vmd.initialize = function () {
     $vmd.Toolbar = $vmd.$('#vmd');
     $vmd.Toolbar.append($vmd.buildToolbar());
 
+    $vmd.Targets = [];
+
     // Allow the toolbar to be vertically draggable, in case it covers elements 
     $vmd.Toolbar.draggable({"revert": false, "handle": "div.vmd-toolbar-handle", "cursor": "move", "grid": [0, 1]});
 
@@ -153,6 +155,8 @@ $vmd.initialize = function () {
     }
 
     $vmd.enableOutlining();
+
+    $vmd.enableEscapeKey();
 
     $vmd.createToggle();
 }

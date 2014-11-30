@@ -1,3 +1,11 @@
+$vmd.enableEscapeKey = function() {
+    $vmd.body.keydown( function(event) {
+        if (event.which == 27) {
+            $vmd.closeMenus();
+        }
+    });
+}
+
 $vmd.enableOutlining = function() {
 
     /*****************

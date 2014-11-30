@@ -5,10 +5,13 @@ $vmd.buildForm = function () {
     var vmdForm = '';
         vmdForm += '<div class="vmd-form">';
         vmdForm += '    <div class="vmd-form-handle ui top attached black block blue header segment">';
-        vmdForm += '        <div class="ui two column grid">';
+        vmdForm += '        <div class="ui three column grid">';
         vmdForm += '            <div class="vmd-identifier ui column">.vmd-identifier</div>';
-        vmdForm += '            <div class="ui right aligned column">';
+        vmdForm += '            <div class="ui center aligned column">';
         vmdForm += '                <div class="vmd-alphabet ui mini circular blue button">A</div>';
+        vmdForm += '            </div>';
+        vmdForm += '            <div class="ui right aligned column">';
+        vmdForm += '                <i class="vmd-repeat-icon lightgray small repeat icon" data-content="Repeat" data-variation="basic small" data-position="right center"></i>';
         vmdForm += '            </div>';
         vmdForm += '        </div>';
         vmdForm += '    </div>';
@@ -16,7 +19,7 @@ $vmd.buildForm = function () {
         vmdForm += '      <div class="field">';
         vmdForm += '          <label>Transition</label>';
         vmdForm += '          <div class="ui fluid action input">';
-        vmdForm += '            <input type="text" name="transition" placeholder="Transition">';
+        vmdForm += '            <input type="text" name="transition" placeholder="example: { translateX: [0, -1000] }">';
         vmdForm += '            <div class="ui button"><i class="play icon"></i></div>';
         vmdForm += '          </div>';
         vmdForm += '      </div>';
