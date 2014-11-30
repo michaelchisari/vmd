@@ -173,20 +173,22 @@
         $vmd.$(thisForm).find('.vmd-delay').css('width', '50%');
         $vmd.$(thisForm).find('.vmd-delay').css('float', 'right');
 
-        $vmd.$(thisForm).find('.vmd-edit').click ( function() {
-            /* Open only the modal associated with the target id. */
-            $vmd.$('.' + targetId).find('.vmd-edit-modal').modal('show');
-        });
+        $vmd.$(thisForm).find('.vmd-alphabet').text(String.fromCharCode($vmd.alphabetIndex))
 
-        var transforms = $vmd.$.Velocity.Transforms;
-        for (t in transforms) {
-            var html = '<div class="item">' + transforms[t] + '</div>';
-            $vmd.$(thisForm).find('.ui.dropdown').find('.menu').append(html);
+        var easings = $vmd.$.Velocity.Easings;
+        for (e in easings) {
+            var selected = '';
+            if (e === "ease") {
+                alert (e);
+                selected = 'selected';
+            }
+            var html = '<option ' + selected + ' value="' + e + '">' + e + '</option>';
+            $vmd.$(thisForm).find('.vmd-easing-dropdown').append(html);
         }
 
         $vmd.Toolbar.append(thisForm);
 
-        $vmd.$('.ui.dropdown').dropdown();
+        $vmd.$('.ui.dropdown').dropdown("set selected", "swing");
 
         $vmd.$(".vmd-form").draggable( {
             "handle": ".vmd-form-handle",

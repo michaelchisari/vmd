@@ -55,7 +55,6 @@ $vmd.initialize = function () {
     /*
      * Create a list of Velocity css transforms.
      */
-
     $vmd.$.Velocity.Transforms = {
 
         'opacity': 'opacity',
