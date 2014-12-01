@@ -160,6 +160,7 @@ $vmd.initialize = function () {
     $vmd.enableOutlining();
 
     $vmd.enableEscapeKey();
+    $vmd.enableAnimationKeys();
     $vmd.enablePlay();
     $vmd.enableStop();
 

@@ -19,6 +19,21 @@ $vmd.enablePlay = function() {
     });
 }
 
+$vmd.enableAnimationKeys = function() {
+    $vmd.body.keydown( function(event) {
+        for (t in $vmd.Targets) {
+            if (event.which == t) {
+                if (!$vmd.active) return (true);
+
+                // If we're on an input field, return
+                if($vmd.$("input,textarea").is(":focus")) return (true);
+
+                $vmd.animate($vmd.Targets[t]);
+            }
+        }
+    });
+}
+
 $vmd.enableStop = function() {
     $vmd.body.keydown( function(event) {
         if (event.which === 50) {
