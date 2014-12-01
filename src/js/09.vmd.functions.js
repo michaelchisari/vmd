@@ -175,6 +175,12 @@
 
         $vmd.$(thisForm).find('.vmd-alphabet').text(String.fromCharCode($vmd.alphabetIndex))
 
+        // Change the color of the form to differentiate between forms.
+        $vmd.$(thisForm).find('.vmd-form-handle').addClass ($vmd.colorList[$vmd.colorIndex]);
+        $vmd.$(thisForm).find('.vmd-alphabet').addClass ($vmd.colorList[$vmd.colorIndex]);
+        $vmd.colorIndex++;
+        if ($vmd.colorIndex > 5) $vmd.colorIndex = 0;
+
         var easings = $vmd.$.Velocity.Easings;
         for (e in easings) {
             var selected = '';

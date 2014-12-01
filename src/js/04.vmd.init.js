@@ -17,6 +17,9 @@ $vmd.initialize = function () {
     $vmd.EASING_DEFAULT = "swing";
     $vmd.DELAY_DEFAULT = 0;
 
+    $vmd.colorList = [ "blue", "orange", "green", "red", "purple", "teal" ];
+    $vmd.colorIndex = 0;
+
     /*********************
         Notifications
     *********************/
