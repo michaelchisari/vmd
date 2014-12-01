@@ -183,7 +183,7 @@
 
         var extraEasings = {
             "spring physics...":'[500,20]',
-            "cubic bezier...":'[.25,1,.25,1]',
+            "cubic bezier...":'[0.25,1,0.25,1]',
             "step...":'[ 4 ]'
         }
 
@@ -251,7 +251,7 @@
             "set selected":"swing",
             "onChange": function (value,text,$choice) {
                 if (text.indexOf('...') > -1) {
-                    $vmd.$('.vmd-easing-data input').val (value);
+                    $vmd.$('.vmd-easing-data input').val ('[' + value + ']');
                     $vmd.$('.vmd-easing-data').show();
                 } else {
                     $vmd.$('.vmd-easing-data').hide();
