@@ -59,25 +59,11 @@ $vmd.stopAll = function() {
 }
 
 $vmd.animate = function (target) {
-   updateParameters(target);
+   $vmd.updateParameters(target);
 
    var index = target.data('vmd-index');
    var properties = target.data('vmd-propertiesMap');
    var options = target.data('options');
-
-    /*
-    $.each([ "duration", "delay", "easing" ], function(_, value) {
-        options[value] = $overlay.find("[name='" + value + "']").val();
-    });
-    
-    if ($overlay.find("select[name='easing'] :selected").attr("data-array")) {
-        try {
-            eval("options.easing = " + $overlay.find("code[name='easingArray']").text());
-        } catch (error) {}
-    }
-
-    $overlay.data("VMD").options = options;
-    */
 
 	try {
 		eval("propertiesMap = " + properties);
@@ -88,6 +74,64 @@ $vmd.animate = function (target) {
         .velocity("stop", true)
         .velocity(propertiesMap, target.data("vmd-options"));
     }
+}
+
+$vmd.updateParameters = function (target) {
+    var index = target.data('vmd-index');
+    var character = String.fromCharCode(index).toUpperCase();
+
+    var form = $vmd.$('.vmd-button-' + character);
+    var transition = form.find("input[name=transition]").val();
+    var easing = form.find("select[name=easing] option:selected").text();
+    var duration = form.find("input[name=duration]").val();
+    var delay = form.find("input[name=delay]").val();
+
+    $vmd.Targets[index].data("vmd-propertiesMap", transition);
+
+/*
+        begin: function(elements) {
+          $.each(elements, function(i, element) {
+            clearElementStyles(element);
+          });
+
+          $vmd.$(this).find("overlay.VMD code[name='propertiesMap']")
+            .velocity("stop", true)
+            .velocity({ color: $vmd.INDICATOR_COLOR }, 75)
+            .velocity("reverse");
+        },
+        complete: function(elements) {
+          var $this = $vmd.$(this),
+            propertiesMap = $this.find("overlay.VMD").data("VMD").propertiesMap,
+            options = $this.find("overlay.VMD").data("VMD").options;
+
+          if (options.loop === true && typeof propertiesMap === "string") {
+            $.each(elements, function(i, element) {
+              $vmd.$(this).velocity(propertiesMap, options);
+            });
+          }
+        }
+      }
+    }
+*/
+
+    var options = new Object;
+
+    options.duration = duration;
+    options.delay = delay;
+    options.easing = easing;
+    options.loop = $vmd.Targets[index].Repeat;
+
+    options.begin = function() {
+        console.log ("Started: " + character);
+    }
+
+    options.complete = function() {
+        console.log ("Completed: " + character);
+    }
+
+    $vmd.Targets[index].data("vmd-options", options);
+
+    return (true);
 }
 
 $vmd.enableOutlining = function() {

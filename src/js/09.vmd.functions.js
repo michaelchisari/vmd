@@ -226,7 +226,8 @@
 
         $vmd.$(thisForm).find("input[name='transition']").change ( function() {
             var index = targetElement.data('vmd-index');
-            $vmd.Targets[index].data("vmd-propertiesMap", $(this).val());
+
+            $vmd.animate($vmd.Targets[index]);
         });
 
         // Initialize the target's default values.
