@@ -122,11 +122,9 @@ $vmd.updateParameters = function (target) {
     options.loop = $vmd.Targets[index].Repeat;
 
     options.begin = function() {
-        console.log ("Started: " + character);
     }
 
     options.complete = function() {
-        console.log ("Completed: " + character);
     }
 
     $vmd.Targets[index].data("vmd-options", options);
