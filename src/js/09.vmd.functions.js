@@ -224,9 +224,17 @@
         $vmd.$(targetElement).data("VMD").propertiesMap = "Hello";
         $vmd.$(targetElement).data("VMD").options = new Object;
 
-        $vmd.$(thisForm).find("input[name='transition']").change ( function() {
-            var index = targetElement.data('vmd-index');
+        // When Enter key is pressed, animate
+        $vmd.$(thisForm).find("input[name='transition']").on ( "keydown", function(event) {
+            if (event.which == 13) {
+                var index = targetElement.data('vmd-index');
+                $vmd.animate($vmd.Targets[index]);
+            }
+        });
 
+        // When the play button is pressed, animate.
+        $vmd.$(thisForm).find(".vmd-play").click ( function() {
+            var index = targetElement.data('vmd-index');
             $vmd.animate($vmd.Targets[index]);
         });
 

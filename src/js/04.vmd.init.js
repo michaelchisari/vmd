@@ -52,6 +52,14 @@ $vmd.initialize = function () {
     $vmd.Toolbar = $vmd.$('#vmd');
     $vmd.Toolbar.append($vmd.buildToolbar());
 
+    $vmd.Toolbar.find(".vmd-play-all").click ( function() {
+        $vmd.animateAll();
+    });
+
+    $vmd.Toolbar.find(".vmd-stop-all").click ( function() {
+        $vmd.stopAll();
+    });
+
     $vmd.Targets = [];
 
     // Allow the toolbar to be vertically draggable, in case it covers elements 

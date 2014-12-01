@@ -14,9 +14,9 @@ $vmd.buildToolbar = function() {
         vmdMenu += '  </div>';
         vmdMenu += '  <div class="right menu">';
         vmdMenu += '    <div class="ui mini buttons">';
-        vmdMenu += '        <div class="ui positive button">1 <i class="play icon"></i></div>';
+        vmdMenu += '        <div class="vmd-play-all ui positive button">1 <i class="play icon"></i></div>';
         vmdMenu += '        <div class="or"></div>';
-        vmdMenu += '        <div class="ui negative button">2 <i class="pause icon"></i></div>';
+        vmdMenu += '        <div class="vmd-stop-all ui negative button">2 <i class="pause icon"></i></div>';
         vmdMenu += '    </div>';
         vmdMenu += '  </div>';
         vmdMenu += '  </div>';
@@ -32,9 +32,9 @@ $vmd.buildToolbar = function() {
         vmdMenu += '        </div>';
         vmdMenu += '        <div class="right floated right aligned column">';
         vmdMenu += '            <div class="ui mini buttons">';
-        vmdMenu += '                <div class="ui positive button">1 <i class="play icon"></i></div>';
+        vmdMenu += '                <div class="vmd-play-all ui positive button">1 <i class="play icon"></i></div>';
         vmdMenu += '                <div class="or"></div>';
-        vmdMenu += '                <div class="ui negative button">2 <i class="pause icon"></i></div>';
+        vmdMenu += '                <div class="vmd-play-all ui negative button">2 <i class="pause icon"></i></div>';
         vmdMenu += '            </div>';
         vmdMenu += '        </div>';
         vmdMenu += '    </div>';

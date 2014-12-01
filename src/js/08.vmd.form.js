@@ -20,7 +20,7 @@ $vmd.buildForm = function () {
         vmdForm += '          <label>Transition</label>';
         vmdForm += '          <div class="ui fluid action input">';
         vmdForm += '            <input type="text" name="transition" placeholder="example: { translateX: [0, -1000] }">';
-        vmdForm += '            <div class="ui button"><i class="play icon"></i></div>';
+        vmdForm += '            <div class="vmd-play ui button"><i class="play icon"></i></div>';
         vmdForm += '          </div>';
         vmdForm += '      </div>';
         vmdForm += '      <div class="four fields">';

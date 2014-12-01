@@ -56,6 +56,12 @@ $vmd.animateAll = function() {
 }
 
 $vmd.stopAll = function() {
+    for (t in $vmd.Targets) {
+          $vmd.Targets[t] 
+            .velocity("stop", true)
+            .velocity({ color: $vmd.INDICATOR_COLOR }, 75)
+            .velocity("reverse");
+    }
 }
 
 $vmd.animate = function (target) {
