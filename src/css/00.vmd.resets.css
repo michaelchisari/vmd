@@ -9,7 +9,6 @@
  * michael@chisari.us
  **************************/
 
-
 #vmd .ui *,
 #vmd .ui *:before,
 #vmd .ui *:after {
@@ -568,4 +567,10 @@
 ::selection {
   background-color: rgba(255, 255, 160, 0.4);
   color: rgba(0, 0, 0, 0.8);
+}
+
+/* Toolbar resets, some sites override these. */
+#vmd .vmd-toolbar .ui,
+#vmd .vmd-toolbar .ui .or {
+    font-size: 100% !important;
 }
