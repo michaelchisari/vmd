@@ -106,3 +106,23 @@
     width:120px !important;
     float:right;
 }
+
+#vmd .vmd-element.button:hover {
+    border:none !important;
+    outline:none !important;
+    background:#ededed !important;
+    color:#666 !important;
+}
+
+#vmd .vmd-element.button {
+    background:#dbdbdb !important;
+    color:#444 !important;
+    font-weight:bold !important;
+}
+
+#vmd .vmd-element.active:hover,
+#vmd .vmd-element.active {
+    background:#ccc !important;
+    color:#222 !important;
+    font-weight:bold !important;
+}
