@@ -219,7 +219,18 @@
         // Set the current target.
         $vmd.Targets[$vmd.alphabetIndex] = targetElement;
 
+        // Create the properties of the current target.
+        $vmd.$(targetElement).data("VMD", { });
+        $vmd.$(targetElement).data("VMD").propertiesMap = "Hello";
+        $vmd.$(targetElement).data("VMD").options = new Object;
+
+        $vmd.$(thisForm).find("input[name='transition']").change ( function() {
+            var index = targetElement.data('vmd-index');
+            $vmd.Targets[index].data("vmd-propertiesMap", $(this).val());
+        });
+
         // Initialize the target's default values.
+        $vmd.Targets[$vmd.alphabetIndex].Alpha = $vmd.alphabetIndex;
         $vmd.Targets[$vmd.alphabetIndex].Repeat = false;
         $vmd.Targets[$vmd.alphabetIndex].Properties = '{}';
         $vmd.Targets[$vmd.alphabetIndex].Easing = $vmd.DEFAULT_EASING;
@@ -301,15 +312,11 @@
     function animate ($target) {
       updateParameters($target);
 
-      $vmd.Toolbar.velocity ({ opacity: 0.05, translateX: -1000 }, 100);
-
       if ($target.data("VMD").propertiesMap) {
         $target.parent()
           .velocity("stop", true)
-          .velocity($target.data("VMD").propertiesMap, $target.data("VMD").options);	
+          .velocity($target.data("VMD").propertiesMap, $target.data("VMD").options);
       }
-
-      $vmd.Toolbar.velocity ({ opacity: 0.95, translateX: 0 }, 100);
     }
 
     function clearElementStyles (element) {

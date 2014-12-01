@@ -6,6 +6,75 @@ $vmd.enableEscapeKey = function() {
     });
 }
 
+$vmd.enablePlay = function() {
+    $vmd.body.keydown( function(event) {
+        if (event.which === 49) {
+            if (!$vmd.active) return (true);
+
+            // If we're on an input field, return
+            if($vmd.$("input,textarea").is(":focus")) return (true);
+
+            $vmd.animateAll();
+        }
+    });
+}
+
+$vmd.enableStop = function() {
+    $vmd.body.keydown( function(event) {
+        if (event.which === 50) {
+            if (!$vmd.active) return (true);
+
+            // If we're on an input field, return
+            if($vmd.$("input,textarea").is(":focus")) return (true);
+
+            $vmd.stopAll();
+        }
+    });
+}
+
+$vmd.animateAll = function() {
+    // Find all VMD targets
+    for (t in $vmd.Targets) {
+        $vmd.animate ($vmd.Targets[t]);
+    }
+
+}
+
+$vmd.stopAll = function() {
+}
+
+$vmd.animate = function (target) {
+   updateParameters(target);
+
+   var index = target.data('vmd-index');
+   var properties = target.data('vmd-propertiesMap');
+   var options = target.data('options');
+
+    /*
+    $.each([ "duration", "delay", "easing" ], function(_, value) {
+        options[value] = $overlay.find("[name='" + value + "']").val();
+    });
+    
+    if ($overlay.find("select[name='easing'] :selected").attr("data-array")) {
+        try {
+            eval("options.easing = " + $overlay.find("code[name='easingArray']").text());
+        } catch (error) {}
+    }
+
+    $overlay.data("VMD").options = options;
+    */
+
+	try {
+		eval("propertiesMap = " + properties);
+	} catch (error) { }
+
+   if (propertiesMap) {
+      target
+        .velocity("stop", true)
+        .velocity(propertiesMap, target.data("vmd-options"));
+    }
+}
+
 $vmd.enableOutlining = function() {
 
     /*****************
