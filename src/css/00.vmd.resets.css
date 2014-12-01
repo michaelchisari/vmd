@@ -572,5 +572,5 @@
 /* Toolbar resets, some sites override these. */
 #vmd .vmd-toolbar .ui,
 #vmd .vmd-toolbar .ui .or {
-    font-size: 100% !important;
+    /* font-size: 100% !important; */
 }
