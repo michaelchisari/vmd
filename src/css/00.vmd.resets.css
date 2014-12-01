@@ -44,7 +44,7 @@
  */
 
 #vmd .ui {
-  font-family: sans-serif;
+  font-family: sans-serif !important;
   /* 1 */
   -ms-text-size-adjust: 100%;
   /* 2 */
@@ -572,5 +572,6 @@
 /* Toolbar resets, some sites override these. */
 #vmd .vmd-toolbar .ui,
 #vmd .vmd-toolbar .ui .or {
-    /* font-size: 100% !important; */
+    font-family: sans-serif !important;
+    font-size: 11px !important;
 }
