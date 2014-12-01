@@ -569,15 +569,3 @@
   color: rgba(0, 0, 0, 0.8);
 }
 
-/* Toolbar resets, some sites override these. */
-#vmd .vmd-toolbar #vmd-logo,
-#vmd .vmd-toolbar #vmd-on-off,
-#vmd .vmd-toolbar .ui,
-#vmd .vmd-toolbar .ui .buttons,
-#vmd .vmd-toolbar .ui .buttons .button,
-#vmd .vmd-toolbar .ui .button,
-#vmd .vmd-toolbar .ui .or,
-#vmd .vmd-toolbar .ui .or {
-    font-family: sans-serif !important;
-    font-size: 11px !important;
-}

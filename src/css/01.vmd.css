@@ -4,7 +4,7 @@
     top:0;
     left:0;
     opacity:0.95;
-    z-index:2;
+    z-index:10000;
 }
 
 #vmd .vmd-toolbar {
@@ -12,8 +12,21 @@
     background: linear-gradient(to bottom, rgba(226,226,226,1) 0%, rgba(254,254,254,1) 100%);
     box-shadow:0 4px 8px rgba(0,0,0,0.4);
     padding:2px 0 1px 1px;
-    height:30px;
-    z-index:1000;
+    height:30px !important;
+    z-index:10001;
+}
+
+/* Toolbar font resets, some sites override these. */
+#vmd .vmd-toolbar #vmd-logo,
+#vmd .vmd-toolbar #vmd-on-off,
+#vmd .vmd-toolbar .ui,
+#vmd .vmd-toolbar .ui .buttons,
+#vmd .vmd-toolbar .ui .buttons .button,
+#vmd .vmd-toolbar .ui .button,
+#vmd .vmd-toolbar .ui .or,
+#vmd .vmd-toolbar .ui .or {
+    font-family: sans-serif !important;
+    font-size: 11px !important;
 }
 
 #vmd-snaptarget {
@@ -23,7 +36,7 @@
     width:100%;
     height:0px;
     left:0;
-    z-index:2000;
+    z-index:20000;
 }
 
 #vmd-logo {
