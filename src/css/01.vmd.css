@@ -1,8 +1,8 @@
 #vmd {
     position:fixed;
     width:100%;
-    top:0 !important;
-    left:0 !important;
+    top:0;
+    left:0;
     opacity:0.95;
     z-index:10000;
 }
@@ -43,11 +43,11 @@
     background:none;
 }
 
-div.ui-widget-handle {
+#vmd div.ui-widget-handle {
     background-color:#000;
 }
 
-.ui.vmd-element.active.button:before {
+#vmd .ui.vmd-element.active.button:before {
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
     background-color:#ccc;
@@ -63,7 +63,7 @@ div.ui-widget-handle {
     transform: rotate(45deg);
 }
 
-.ui.vertical.menu {
+#vmd .ui.vertical.menu {
     box-shadow:0 4px 8px rgba(0,0,0,0.4);
 }
 
@@ -77,31 +77,32 @@ div.ui-widget-handle {
     font-weight:bold;
 }
 
-.gray {
+#vmd .gray {
     color:#999 !important;
 }
 
-.lightgray {
+#vmd .lightgray {
     color:#ddd !important;
 }
 
-.vmd-form {
+#vmd .vmd-form {
     position:fixed !important;
     width:680px !important;
     top:40px !important;
 }
 
-.vmd-toolbar-handle {
+#vmd .vmd-toolbar-handle {
     background:none !important;
+    z-index:20000 !important;
 }
 
-input[name="easing-data"], 
-input[name="transition"] {
+#vmd input[name="easing-data"], 
+#vmd input[name="transition"] {
     font-family:"Courier New" !important;
     font-weight:bold;
 }
 
-.vmd-easing-data {
+#vmd .vmd-easing-data {
     width:120px !important;
     float:right;
 }
