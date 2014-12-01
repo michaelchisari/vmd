@@ -181,13 +181,28 @@
         $vmd.colorIndex++;
         if ($vmd.colorIndex > 5) $vmd.colorIndex = 0;
 
+        var extraEasings = {
+            "spring physics...":'[500,20]',
+            "cubic bezier...":'[.25,1,.25,1]',
+            "step...":'[ 4 ]'
+        }
+
+        for (e in extraEasings) {
+            var selected = '';
+            if (e === $vmd.EASING_DEFAULT) {
+                selected = 'selected';
+            }
+                var html = '<option ' + selected + ' value="' + extraEasings[e] + '">' + e + '</option>';
+                $vmd.$(thisForm).find('.vmd-easing-dropdown').append(html);
+        }
+
         var easings = $vmd.$.Velocity.Easings;
         for (e in easings) {
             var selected = '';
             if (e === $vmd.EASING_DEFAULT) {
                 selected = 'selected';
             }
-            var html = '<option ' + selected + ' value="' + e + '">' + e + '</option>';
+            var html = '<option ' + selected + ' value="' + easings[e] + '">' + e + '</option>';
             $vmd.$(thisForm).find('.vmd-easing-dropdown').append(html);
         }
 
@@ -232,12 +247,24 @@
         // Append the form to the #vmd toolbar element.
         $vmd.Toolbar.append(thisForm);
 
-        $vmd.$('.ui.dropdown').dropdown("set selected", "swing");
+        $vmd.$('.vmd-easing-dropdown').dropdown({
+            "set selected":"swing",
+            "onChange": function (value,text,$choice) {
+                if (text.indexOf('...') > -1) {
+                    $vmd.$('.vmd-easing-data input').val (value);
+                    $vmd.$('.vmd-easing-data').show();
+                } else {
+                    $vmd.$('.vmd-easing-data').hide();
+                }
+            }
+        });
 
         $vmd.$(".vmd-form").draggable( {
             "handle": ".vmd-form-handle",
             "cursor": "move"
         });
+
+        $vmd.$('.vmd-easing-data').hide();
     }
 
     /*****************

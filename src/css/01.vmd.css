@@ -89,5 +89,6 @@ input[name="transition"] {
 }
 
 .vmd-easing-data {
-    display:none !important;
+    width:120px !important;
+    float:right;
 }

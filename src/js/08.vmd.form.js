@@ -33,12 +33,12 @@ $vmd.buildForm = function () {
         vmdForm += '            <input type="range" name="delay" min="0" max="2000" value="' + $vmd.DELAY_DEFAULT + '" />';
         vmdForm += '        </div>';
         vmdForm += '        <div class="field">';
-        vmdForm += '            <select name="easing" class="vmd-easing-dropdown ui compact selection dropdown" id="easing">';
+        vmdForm += '            <select name="easing" class="vmd-easing-dropdown ui selection dropdown" id="easing">';
         vmdForm += '            </select>';
         vmdForm += '        </div>';
         vmdForm += '        <div class="field">';
         vmdForm += '          <div class="vmd-easing-data ui fluid input">';
-        vmdForm += '            <input type="text" name="easing-data" placeholder="Easing data">';
+        vmdForm += '            <input type="text" name="easing-data" placeholder="eg, [50,20]" value="[ ]">';
         vmdForm += '          </div>';
         vmdForm += '        </div>';
         vmdForm += '      </div>';
