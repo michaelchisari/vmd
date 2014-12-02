@@ -2,7 +2,7 @@
 Helper Functions
 ***********************/
 
-$vmd.buildFunctions = function() {
+VMD.buildFunctions = function() {
 
     function objectToString (variable) {
         var properties = [];
@@ -23,7 +23,7 @@ $vmd.buildFunctions = function() {
     }
 
     /* From: http://stackoverflow.com/questions/2068272/getting-a-jquery-selector-for-an-element */
-    $vmd.$.fn.getPath = function () {
+    VMD.$.fn.getPath = function () {
         if (this.length != 1) throw 'Requires one element.';
 
         var path, node = this;
@@ -52,7 +52,7 @@ $vmd.buildFunctions = function() {
     };
 
     /* From: http://stackoverflow.com/questions/3169786/clear-text-selection-with-javascript */
-    $vmd.clearPageSelection = function () {
+    VMD.clearPageSelection = function () {
         if (window.getSelection) {
           if (window.getSelection().empty) {  // Chrome
             window.getSelection().empty();

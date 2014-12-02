@@ -1,176 +1,188 @@
-$vmd.initialize = function () {
+/*
+ * Initialize Velocity Motion Designer
+ *
+ * Initialize global variables, print instructions, create toolbar
+ */
+VMD.initialize = function () {
 
-    $vmd.buildFunctions();
+  VMD.buildFunctions();
 
-    /*************
-        Setup
-    *************/
+  /*
+   * System Variables
+   */
 
-    $vmd.alphabetIndex = 64;
-    $vmd.propertiesMapDefault = '{ }';
+  // Character in the alphabet for keydown and reference
+  VMD._alphabetIndex = 64;
 
-    $vmd.body = $vmd.$("body");
+  // Map of Velocity properties attached to a target
+  VMD._propertiesMapDefault = '{ }';
 
-    $vmd.VERSION = "1.1.0-rc1";
-    $vmd.INDICATOR_COLOR = "#82E682";
-    $vmd.DURATION_DEFAULT = 800;
-    $vmd.EASING_DEFAULT = "swing";
-    $vmd.DELAY_DEFAULT = 0;
+  // Shorthand for body element
+  VMD.body = VMD.$('body');
 
-    $vmd.colorList = [ "blue", "orange", "green", "red", "purple", "teal" ];
-    $vmd.colorIndex = 0;
+  VMD._version = '1.1.0-rc1';
+  VMD._indicatorColor = '#82E682';
+ 
+  // Default settings
+  VMD._durationDefault = 800;
+  VMD._easingDefault = 'swing';
+  VMD._delayDefault = 0;
 
-    /*********************
-        Notifications
-    *********************/
+  // Color list to cycle through, so forms are recognizable
+  VMD._colorList = [ 'blue', 'orange', 'green', 'red', 'purple', 'teal' ];
+  VMD._colorIndex = 0;
 
-    var instructions = [
-            "Velocity Motion Designer " + $vmd.VERSION + ". http://VelocityJS.org",
-            " * Note: All HREF links are disabled.",
-            " * Note: Refer to \"CSS Support\" on http://VelocityJS.org for supported properties.",
-            " * Note: You have access to all UI pack effects: http://VelocityJS.org/#uiPack.",
-            " - Shift-click on an element: Initialize.",
-            " - Click on a key identifier: Toggle looping.",
-            " - Enter key (when modifying animation parameters): Animate.",
-            " - a-z keys: Restart/reset the associated animation.",
-            " - 1 key: Restart all animations.",
-            " - 2 key: Reset all animations.",
-            " - Esc key: Close visible modal."
-        ];
+  /*
+   * Notifications
+   */
 
-    $vmd.$.each(instructions, function(i, instruction) {
-        console.log(instruction);
-    });
+  var instructions = [
+    'Velocity Motion Designer ' + VMD._version + '. http://VelocityJS.org',
+    ' * Note: All HREF links are disabled.',
+    ' * Note: Refer to "CSS Support" on http://VelocityJS.org for supported properties.',
+    ' * Note: You have access to all UI pack effects: http://VelocityJS.org/#uiPack.',
+    ' - Shift-click on an element: Initialize.',
+    ' - Click on a key identifier: Toggle looping.',
+    ' - Enter key (when modifying animation parameters): Animate.',
+    ' - a-z keys: Restart/reset the associated animation.',
+    ' - 1 key: Restart all animations.',
+    ' - 2 key: Reset all animations.',
+    ' - Esc key: Close visible modal.'
+  ];
 
-    document.title = "VMD | " + document.title;
+  // Print instructions to the console
+  VMD.$.each(instructions, function(i, instruction) {
+    console.log(instruction);
+  });
 
-    var vmdToolbar  = '<div id="vmd">';
-    vmdToolbar += '</div>';
+  // Add VMD indicator to browser title bar
+  document.title = "VMD | " + document.title;
 
-    $vmd.body.prepend(vmdToolbar);
+  // VMD Toolbar bare markup
+  var toolBar  = '<div id="vmd"></div>';
 
-    $vmd.Toolbar = $vmd.$('#vmd');
-    $vmd.Toolbar.append($vmd.buildToolbar());
+  VMD.body.append(toolBar);
 
-    $vmd.Toolbar.find(".vmd-play-all").click ( function() {
-        $vmd.animateAll();
-    });
+  // Toolbar class is also a jquery shorthand to the #vmd id.
+  VMD.Toolbar = VMD.$('#vmd');
+  VMD.Toolbar.append(VMD.buildToolbar());
 
-    $vmd.Toolbar.find(".vmd-stop-all").click ( function() {
-        $vmd.stopAll();
-    });
+  // On click, play all
+  VMD.Toolbar.find(".vmd-play-all").click ( function() {
+    VMD.animateAll();
+  });
 
-    $vmd.Targets = [];
+  // On click, stop all
+  VMD.Toolbar.find(".vmd-stop-all").click ( function() {
+    VMD.stopAll();
+  });
 
-    // Allow the toolbar to be vertically draggable, in case it covers elements 
-    $vmd.Toolbar.draggable({"revert": false, "handle": ".vmd-toolbar-handle", "cursor": "move", "grid": [0, 1]});
+  // Create the array of elements that are targetted
+  VMD.Targets = [];
 
-    /*
-     * Create a list of Velocity css transforms.
-     */
-    $vmd.$.Velocity.Transforms = {
+  // Allow the toolbar to be vertically draggable, to uncover elements
+  VMD.Toolbar.draggable({"revert": false, "handle": ".vmd-toolbar-handle", "cursor": "move", "grid": [0, 1]});
 
-        'opacity': 'opacity',
-        'width': 'width',
-        'height': 'height',
-        'paddingTop': 'paddingTop',
-        'paddingRight': 'paddingRight',
-        'paddingBottom': 'paddingBottom',
-        'paddingLeft': 'paddingLeft',
-        'top': 'top',
-        'right': 'right',
-        'bottom': 'bottom',
-        'left': 'left',
-        'marginTop': 'marginTop',
-        'marginRight': 'marginRight',
-        'marginBottom': 'marginBottom',
-        'marginLeft': 'marginLeft',
-        'borderTopWidth': 'borderTopWidth (no %)',
-        'borderRightWidth': 'borderRightWidth (no %)',
-        'borderBottomWidth': 'borderBottomWidth (no %)',
-        'borderLeftWidth': 'borderLeftWidth (no %)',
-        'borderRadius': 'borderRadius (IE9+)',
-        'outlineWidth': 'outlineWidth (no %)',
-        'fontSize': 'fontSize',
-        'lineHeight': 'lineHeight',
-        'letterSpacing': 'letterSpacing (no %)',
-        'wordSpacing': 'wordSpacing (no %)',
-        'color': 'color (hex string)',
-        'colorRed': 'colorRed (unitless or %)',
-        'colorGreen': 'colorGreen (unitless or %)',
-        'colorBlue': 'colorBlue (unitless or %)',
-        'colorAlpha': 'colorAlpha (unitless)',
-        'backgroundColor': 'backgroundColor (hex string)',
-        'backgroundColorRed': 'backgroundColorRed (unitless or %)',
-        'backgroundColorGreen': 'backgroundColorGreen (unitless or %)',
-        'backgroundColorBlue': 'backgroundColorBlue (unitless or %)',
-        'backgroundColorAlpha': 'backgroundColorAlpha (unitless or %)',
-        'borderColor': 'borderColor (hex string)',
-        'borderColorRed': 'borderColorRed (unitless or %)',
-        'borderColorGreen': 'borderColorGreen (unitless or %)',
-        'borderColorBlue': 'borderColorBlue (unitless or %)',
-        'borderColorAlpha': 'borderColorAlpha (unitless)',
-        'outlineColor': 'outlineColor (hex string)',
-        'outlineColorRed': 'outlineColorRed (unitless or %)',
-        'outlineColorGreen': 'outlineColorGreen (unitless or %)',
-        'outlineColorBlue': 'outlineColorBlue (unitless or %)',
-        'outlineColorAlpha': 'outlineColorAlpha (unitless)',
-        'textShadowX': 'textShadowX (no %) (IE9+)',
-        'textShadowY': 'textShadowY (no %) (IE9+)',
-        'textShadowBlur': 'textShadowBlur (no %) (IE9+)',
-        'boxShadowX': 'boxShadowX (no %)',
-        'boxShadowY': 'boxShadowY (no %)',
-        'boxShadowBlur': 'boxShadowBlur (no %)',
-        'boxShadowSpread': 'boxShadowSpread (no %)',
-        'translateX': 'selected>translateX',
-        'translateY': 'translateY',
-        'translateZ': 'translateZ (IE10+)',
-        'scale': 'scale (unitless or %)',
-        'scaleX': 'scaleX (unitless or %)',
-        'scaleY': 'scaleY (unitless or %)',
-        'rotateX': 'rotateX (unitless or deg) (IE10+)',
-        'rotateY': 'rotateY (unitless or deg) (IE10+)',
-        'rotateZ': 'rotateZ (unitless or deg)',
-        'skewX': 'skewX (unitless or deg)',
-        'skewY': 'skewY (unitless or deg)',
-        'clipTop': 'clipTop (needs position:abs)',
-        'clipRight': 'clipRight (needs position:abs)',
-        'clipBottom': 'clipBottom (needs position:abs)',
-        'clipLeft': 'clipLeft (needs position:abs)',
-        'blur': 'blur (px/em/rem) (no IE, no FF, Android 4.4+)'
-    }
+  /*
+   * Create a list of Velocity css transforms
+   */
+  // TODO: Add to searchable dropdown or some other reference
+  VMD.$.Velocity.Transforms = {
+    'opacity': 'opacity',
+    'width': 'width',
+    'height': 'height',
+    'paddingTop': 'paddingTop',
+    'paddingRight': 'paddingRight',
+    'paddingBottom': 'paddingBottom',
+    'paddingLeft': 'paddingLeft',
+    'top': 'top',
+    'right': 'right',
+    'bottom': 'bottom',
+    'left': 'left',
+    'marginTop': 'marginTop',
+    'marginRight': 'marginRight',
+    'marginBottom': 'marginBottom',
+    'marginLeft': 'marginLeft',
+    'borderTopWidth': 'borderTopWidth (no %)',
+    'borderRightWidth': 'borderRightWidth (no %)',
+    'borderBottomWidth': 'borderBottomWidth (no %)',
+    'borderLeftWidth': 'borderLeftWidth (no %)',
+    'borderRadius': 'borderRadius (IE9+)',
+    'outlineWidth': 'outlineWidth (no %)',
+    'fontSize': 'fontSize',
+    'lineHeight': 'lineHeight',
+    'letterSpacing': 'letterSpacing (no %)',
+    'wordSpacing': 'wordSpacing (no %)',
+    'color': 'color (hex string)',
+    'colorRed': 'colorRed (unitless or %)',
+    'colorGreen': 'colorGreen (unitless or %)',
+    'colorBlue': 'colorBlue (unitless or %)',
+    'colorAlpha': 'colorAlpha (unitless)',
+    'backgroundColor': 'backgroundColor (hex string)',
+    'backgroundColorRed': 'backgroundColorRed (unitless or %)',
+    'backgroundColorGreen': 'backgroundColorGreen (unitless or %)',
+    'backgroundColorBlue': 'backgroundColorBlue (unitless or %)',
+    'backgroundColorAlpha': 'backgroundColorAlpha (unitless or %)',
+    'borderColor': 'borderColor (hex string)',
+    'borderColorRed': 'borderColorRed (unitless or %)',
+    'borderColorGreen': 'borderColorGreen (unitless or %)',
+    'borderColorBlue': 'borderColorBlue (unitless or %)',
+    'borderColorAlpha': 'borderColorAlpha (unitless)',
+    'outlineColor': 'outlineColor (hex string)',
+    'outlineColorRed': 'outlineColorRed (unitless or %)',
+    'outlineColorGreen': 'outlineColorGreen (unitless or %)',
+    'outlineColorBlue': 'outlineColorBlue (unitless or %)',
+    'outlineColorAlpha': 'outlineColorAlpha (unitless)',
+    'textShadowX': 'textShadowX (no %) (IE9+)',
+    'textShadowY': 'textShadowY (no %) (IE9+)',
+    'textShadowBlur': 'textShadowBlur (no %) (IE9+)',
+    'boxShadowX': 'boxShadowX (no %)',
+    'boxShadowY': 'boxShadowY (no %)',
+    'boxShadowBlur': 'boxShadowBlur (no %)',
+    'boxShadowSpread': 'boxShadowSpread (no %)',
+    'translateX': 'selected>translateX',
+    'translateY': 'translateY',
+    'translateZ': 'translateZ (IE10+)',
+    'scale': 'scale (unitless or %)',
+    'scaleX': 'scaleX (unitless or %)',
+    'scaleY': 'scaleY (unitless or %)',
+    'rotateX': 'rotateX (unitless or deg) (IE10+)',
+    'rotateY': 'rotateY (unitless or deg) (IE10+)',
+    'rotateZ': 'rotateZ (unitless or deg)',
+    'skewX': 'skewX (unitless or deg)',
+    'skewY': 'skewY (unitless or deg)',
+    'clipTop': 'clipTop (needs position:abs)',
+    'clipRight': 'clipRight (needs position:abs)',
+    'clipBottom': 'clipBottom (needs position:abs)',
+    'clipLeft': 'clipLeft (needs position:abs)',
+    'blur': 'blur (px/em/rem) (no IE, no FF, Android 4.4+)'
+  }
 
-    /*
-     * Create the VMD toolbar 
-     */
-    $vmd.systemFont = 'Helvetica Neue, Arial';
+  /*
+   * Create the VMD toolbar 
+   */
+  VMD.Toolbar.show();
 
-    $vmd.Toolbar.css('font-family', $vmd.systemFont, 'important');
+  /*
+   * Enable various key controls
+   */
 
-    $vmd.Toolbar.show();
+  // Outlining
+  VMD.enableOutlining();
 
-    /***************
-       VMD Functions
-    ***************/
+  // Escape closes any open forms
+  VMD.enableEscapeKey();
 
-    /*
-     * Select a toolbar button
-     */
-    $vmd.selectButton = function ($target) {
-        var menuId = '#vmd-button-' + $target.data("vmd-button-letter");
-        $vmd.closeMenus();
+  // A-Z for specific elements
+  VMD.enableAnimationKeys();
 
-        $vmd.openMenu ($vmd.$(menuId));
-        
-        return (true);
-    }
+  // 1 to play all animations
+  VMD.enablePlay();
 
-    $vmd.enableOutlining();
+  // 2 to stop all animations
+  VMD.enableStop();
 
-    $vmd.enableEscapeKey();
-    $vmd.enableAnimationKeys();
-    $vmd.enablePlay();
-    $vmd.enableStop();
-
-    $vmd.createToggle();
+  // On/Off toggle for Toolbar 
+  VMD.createToggle();
 }
+

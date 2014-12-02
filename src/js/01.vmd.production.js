@@ -1,7 +1,7 @@
 // Put any variables for production in here.
 
-$vmd = new Object;
+VMD = {};
 
-$vmd._linebreak = '\\n';
+VMD._linebreak = '\\n';
 
-$vmd._protocol = '';
+VMD._protocol = '';

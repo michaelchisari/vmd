@@ -5,38 +5,38 @@
     /*
      * Toggle page inputs on and off
      */
-    $vmd.togglePageInputs = function (on) {
+    VMD.togglePageInputs = function (on) {
         if (on) {
             /* Turn every non-vmd input on */
-            $vmd.$('a').each (function () {
-                if (!$vmd.$(this).closest("#vmd").length) {
-                    $vmd.$(this).off('click');
+            VMD.$('a').each (function () {
+                if (!VMD.$(this).closest("#vmd").length) {
+                    VMD.$(this).off('click');
                 }
             });
-            $vmd.$('button').each (function () {
-                if (!$vmd.$(this).closest("#vmd").length) {
-                    $vmd.$(this).off('click');
+            VMD.$('button').each (function () {
+                if (!VMD.$(this).closest("#vmd").length) {
+                    VMD.$(this).off('click');
                 }
             });
-            $vmd.$('input').each (function () {
-                if (!$vmd.$(this).closest("#vmd").length) {
-                    $vmd.$(this).off('click');
+            VMD.$('input').each (function () {
+                if (!VMD.$(this).closest("#vmd").length) {
+                    VMD.$(this).off('click');
                 }
             });
         } else {
             /* Turn every non-vmd input off */
-            $vmd.$('a').on('click', function(e) { 
-                if (!$vmd.$(this).closest("#vmd").length) {
+            VMD.$('a').on('click', function(e) { 
+                if (!VMD.$(this).closest("#vmd").length) {
                     e.preventDefault(); 
                 }
             });
-            $vmd.$('button').on('click', function(e) { 
-                if (!$vmd.$(this).closest("#vmd").length) {
+            VMD.$('button').on('click', function(e) { 
+                if (!VMD.$(this).closest("#vmd").length) {
                     e.preventDefault(); 
                 }
             });
-            $vmd.$('input').on('click', function(e) { 
-                if (!$vmd.$(this).closest("#vmd").length) {
+            VMD.$('input').on('click', function(e) { 
+                if (!VMD.$(this).closest("#vmd").length) {
                     e.preventDefault(); 
                 }
             });
@@ -46,12 +46,12 @@
     /*
      * Turn the VMD on and off 
      */
-    $vmd.createToggle = function() {
+    VMD.createToggle = function() {
 
         /* Make links, buttons and inputs unclickable */
-        $vmd.togglePageInputs(false);
+        VMD.togglePageInputs(false);
 
-        var $toggle  = $vmd.$('#vmd-on-off');
+        var $toggle  = VMD.$('#vmd-on-off');
         $toggle
         .state({
             text: {
@@ -63,11 +63,11 @@
         $toggle.addClass('active');
         $toggle.text('On');
 
-        $vmd.active = true;
+        VMD.active = true;
 
         $toggle.click ( function(event) {
-            var buttons = $vmd.$('.ui.vmd-element.button');
-            var keys = $vmd.$('span[name="key"]');
+            var buttons = VMD.$('.ui.vmd-element.button');
+            var keys = VMD.$('span[name="key"]');
 
             /* Set the global VMD active flag and toggle buttons */
             if ($toggle.hasClass('active')) {
@@ -79,107 +79,107 @@
                 }
                 if (keys.length) keys.show();
                 
-                $vmd.Toolbar.velocity ({ opacity: 1 }, 750);
-                $vmd.active = true;
+                VMD.Toolbar.velocity ({ opacity: 1 }, 750);
+                VMD.active = true;
                 /* Make inputs unclickable */
-                $vmd.togglePageInputs (false);
+                VMD.togglePageInputs (false);
             } else {
                 /* Remove VMD from browser title */
                 document.title = document.title.slice(5, document.title.length);
-                $vmd.active = false;
-                $vmd.Toolbar.velocity ({ opacity: 0.35 }, 750);
+                VMD.active = false;
+                VMD.Toolbar.velocity ({ opacity: 0.35 }, 750);
                 if (buttons.length) {
                     buttons.prop('disabled', 'disabled');
-                    $vmd.closeMenus();
+                    VMD.closeMenus();
                 }
                 if (keys.length) keys.hide();
                 /* Make inputs clickable again */
-                $vmd.togglePageInputs(true);
+                VMD.togglePageInputs(true);
             }
         });
     };
 
     /* Close all open menus */
-    $vmd.closeMenus = function() {
+    VMD.closeMenus = function() {
         // Un-select all element buttons
-        $vmd.$(".ui.vmd-element.button").each (function() {
-            $vmd.$(this).removeClass("active");
+        VMD.$(".ui.vmd-element.button").each (function() {
+            VMD.$(this).removeClass("active");
         });
-        $vmd.$(".vmd-form").each (function() {
-           $vmd.$(this).hide();
+        VMD.$(".vmd-form").each (function() {
+           VMD.$(this).hide();
         });
     }
 
     /* Open the target select menu form */
-    $vmd.openMenu = function (target) {
-        $vmd.$(target).addClass('active');
-        var id = '.' + $vmd.$(target).attr('id');
-        $vmd.$(id).velocity({ opacity: 1 }, { display: "auto" });
+    VMD.openMenu = function (target) {
+        VMD.$(target).addClass('active');
+        var id = '.' + VMD.$(target).attr('id');
+        VMD.$(id).velocity({ opacity: 1 }, { display: "auto" });
     }
 
     /* Add functionality to elements. */
-    $vmd.updateButton = function(targetId, targetElement) {
+    VMD.updateButton = function(targetId, targetElement) {
 
         /* Create the DOM id from the targetId */
         var id = '#' + targetId;
 
         /* Close any open menus. */
-        $vmd.closeMenus();
+        VMD.closeMenus();
 
         /* Create the velocity form */
-        $vmd.createForm($vmd.$(id), targetElement);
+        VMD.createForm(VMD.$(id), targetElement);
 
         /* Attach click behavior to element */
-        $vmd.$(id).click(function() {
-            if ($vmd.$(this).hasClass("active")) {
+        VMD.$(id).click(function() {
+            if (VMD.$(this).hasClass("active")) {
                 /* Close the currently open menu */
-                $vmd.closeMenus();
+                VMD.closeMenus();
             } else {
                 /* Close any open menus */
-                $vmd.closeMenus();
+                VMD.closeMenus();
 
                 /* Open the currently clicked menu */
-                $vmd.$(this).addClass("active");
-                $vmd.openMenu(this);
+                VMD.$(this).addClass("active");
+                VMD.openMenu(this);
             }
         });
     }
 
     /* Create the element form underneath the button. */
-    $vmd.createForm = function (target, targetElement) {
+    VMD.createForm = function (target, targetElement) {
         
-        var thisForm = $vmd.$($vmd.buildForm());
+        var thisForm = VMD.$(VMD.buildForm());
         // Get the jquery path to the element
-        var offset = $vmd.$(target).offset();
-        var identifier = $vmd.$(targetElement).getPath()
+        var offset = VMD.$(target).offset();
+        var identifier = VMD.$(targetElement).getPath()
         var targetId = target.attr('id');
         thisForm.find(".vmd-identifier").text(identifier);
-        $vmd.$(thisForm).css("position", "absolute");
+        VMD.$(thisForm).css("position", "absolute");
         var left = offset.left - 100;
         if (left < 20) left = 20;
-        $vmd.$(thisForm).offset({ top: -8, left: left });
-        $vmd.$(thisForm).addClass(targetId);
-        $vmd.$(thisForm).find('.item').css('width', '100%');
-        $vmd.$(thisForm).css('width', 450);
+        VMD.$(thisForm).offset({ top: -8, left: left });
+        VMD.$(thisForm).addClass(targetId);
+        VMD.$(thisForm).find('.item').css('width', '100%');
+        VMD.$(thisForm).css('width', 450);
 
-        $vmd.$(thisForm).find('.vmd-transition').css('width', '50%');
-        $vmd.$(thisForm).find('.vmd-transition').css('float', 'left');
-        $vmd.$(thisForm).find('.vmd-transition-input').css('width', '50%');
-        $vmd.$(thisForm).find('.vmd-transition-input').css('float', 'right');
+        VMD.$(thisForm).find('.vmd-transition').css('width', '50%');
+        VMD.$(thisForm).find('.vmd-transition').css('float', 'left');
+        VMD.$(thisForm).find('.vmd-transition-input').css('width', '50%');
+        VMD.$(thisForm).find('.vmd-transition-input').css('float', 'right');
 
-        $vmd.$(thisForm).find('.vmd-duration').css('width', '50%');
-        $vmd.$(thisForm).find('.vmd-duration').css('float', 'left');
+        VMD.$(thisForm).find('.vmd-duration').css('width', '50%');
+        VMD.$(thisForm).find('.vmd-duration').css('float', 'left');
 
-        $vmd.$(thisForm).find('.vmd-delay').css('width', '50%');
-        $vmd.$(thisForm).find('.vmd-delay').css('float', 'right');
+        VMD.$(thisForm).find('.vmd-delay').css('width', '50%');
+        VMD.$(thisForm).find('.vmd-delay').css('float', 'right');
 
-        $vmd.$(thisForm).find('.vmd-alphabet').text(String.fromCharCode($vmd.alphabetIndex))
+        VMD.$(thisForm).find('.vmd-alphabet').text(String.fromCharCode(VMD._alphabetIndex))
 
         // Change the color of the form to differentiate between forms.
-        $vmd.$(thisForm).find('.vmd-form-handle').addClass ($vmd.colorList[$vmd.colorIndex]);
-        $vmd.$(thisForm).find('.vmd-alphabet').addClass ($vmd.colorList[$vmd.colorIndex]);
-        $vmd.colorIndex++;
-        if ($vmd.colorIndex > 5) $vmd.colorIndex = 0;
+        VMD.$(thisForm).find('.vmd-form-handle').addClass (VMD._colorList[VMD._colorIndex]);
+        VMD.$(thisForm).find('.vmd-alphabet').addClass (VMD._colorList[VMD._colorIndex]);
+        VMD._colorIndex++;
+        if (VMD.colorIndex > 5) VMD.colorIndex = 0;
 
         var extraEasings = {
             "spring physics...":'[500,20]',
@@ -189,102 +189,103 @@
 
         for (e in extraEasings) {
             var selected = '';
-            if (e === $vmd.EASING_DEFAULT) {
+            if (e === VMD._easingDefault) {
                 selected = 'selected';
             }
                 var html = '<option ' + selected + ' value="' + extraEasings[e] + '">' + e + '</option>';
-                $vmd.$(thisForm).find('.vmd-easing-dropdown').append(html);
+                VMD.$(thisForm).find('.vmd-easing-dropdown').append(html);
         }
 
-        var easings = $vmd.$.Velocity.Easings;
+        var easings = VMD.$.Velocity.Easings;
         for (e in easings) {
             var selected = '';
-            if (e === $vmd.EASING_DEFAULT) {
+            if (e === VMD._easingDefault) {
                 selected = 'selected';
             }
             var html = '<option ' + selected + ' value="' + easings[e] + '">' + e + '</option>';
-            $vmd.$(thisForm).find('.vmd-easing-dropdown').append(html);
+            VMD.$(thisForm).find('.vmd-easing-dropdown').append(html);
         }
 
         // Update delay range slider
-        $vmd.$(thisForm).find("input[name='delay']").on ("input", function() {
-            $vmd.$(this).parent().find('.vmd-delay-amount').text(this.value);
+        VMD.$(thisForm).find("input[name='delay']").on ("input", function() {
+            VMD.$(this).parent().find('.vmd-delay-amount').text(this.value);
         });
 
         // Update duration range slider
-        $vmd.$(thisForm).find("input[name='duration']").on ("input", function() {
-            $vmd.$(this).parent().find('.vmd-duration-amount').text(this.value);
+        VMD.$(thisForm).find("input[name='duration']").on ("input", function() {
+            VMD.$(this).parent().find('.vmd-duration-amount').text(this.value);
         });
 
         // Set the current target.
-        $vmd.Targets[$vmd.alphabetIndex] = targetElement;
+        VMD.Targets[VMD._alphabetIndex] = targetElement;
 
         // Create the properties of the current target.
-        $vmd.$(targetElement).data("VMD", { });
-        $vmd.$(targetElement).data("VMD").propertiesMap = "Hello";
-        $vmd.$(targetElement).data("VMD").options = new Object;
+        VMD.$(targetElement).data("VMD", { });
+        VMD.$(targetElement).data("VMD").propertiesMap = "Hello";
+        VMD.$(targetElement).data("VMD").options = new Object;
 
         // When Enter key is pressed, animate
-        $vmd.$(thisForm).find("input[name='transition']").on ( "keydown", function(event) {
+        VMD.$(thisForm).find("input[name='transition']").on ( "keydown", function(event) {
             if (event.which == 13) {
+                event.preventDefault();
                 var index = targetElement.data('vmd-index');
-                $vmd.animate($vmd.Targets[index]);
+                VMD.animate(VMD.Targets[index]);
             }
         });
 
         // When the play button is pressed, animate.
-        $vmd.$(thisForm).find(".vmd-play").click ( function() {
+        VMD.$(thisForm).find(".vmd-play").click ( function() {
             var index = targetElement.data('vmd-index');
-            $vmd.animate($vmd.Targets[index]);
+            VMD.animate(VMD.Targets[index]);
         });
 
         // Initialize the target's default values.
-        $vmd.Targets[$vmd.alphabetIndex].Alpha = $vmd.alphabetIndex;
-        $vmd.Targets[$vmd.alphabetIndex].Repeat = false;
-        $vmd.Targets[$vmd.alphabetIndex].Properties = '{}';
-        $vmd.Targets[$vmd.alphabetIndex].Easing = $vmd.DEFAULT_EASING;
-        $vmd.Targets[$vmd.alphabetIndex].Delay = $vmd.DEFAULT_DELAY;
-        $vmd.Targets[$vmd.alphabetIndex].Duration = $vmd.DEFAULT_DURATION;
+        VMD.Targets[VMD._alphabetIndex].Alpha = VMD._alphabetIndex;
+        VMD.Targets[VMD._alphabetIndex].Repeat = false;
+        VMD.Targets[VMD._alphabetIndex].Properties = '{}';
+        VMD.Targets[VMD._alphabetIndex].Easing = VMD._easingDefault;
+        VMD.Targets[VMD._alphabetIndex].Delay = VMD._delayDefault;
+        VMD.Targets[VMD._alphabetIndex].Duration = VMD._durationDefault;
 
         // Attach the target element index to the repeat icon
-        $vmd.$(thisForm).find(".vmd-repeat-icon").data('target-element', $vmd.alphabetIndex);
+        VMD.$(thisForm).find(".vmd-repeat-icon").data('target-element', VMD._alphabetIndex);
 
         // Attach the index to the target element
-        targetElement.data('vmd-index', $vmd.alphabetIndex);
+        targetElement.data('vmd-index', VMD._alphabetIndex);
 
         // Initialize the repeat button's behavior
-        $vmd.$(thisForm).find(".vmd-repeat-icon").popup();
-        $vmd.$(thisForm).find(".vmd-repeat-icon").click ( function() {
-            var target = $vmd.$(this).data('target-element');
-            $vmd.$(this).toggleClass("lightgray");
-            if ($vmd.$(this).hasClass("lightgray")) {
-                $vmd.Targets[target].Repeat = false;
+        VMD.$(thisForm).find(".vmd-repeat-icon").popup();
+        VMD.$(thisForm).find(".vmd-repeat-icon").click ( function() {
+            var target = VMD.$(this).data('target-element');
+            VMD.$(this).toggleClass("lightgray");
+            if (VMD.$(this).hasClass("lightgray")) {
+                VMD.Targets[target].Repeat = false;
             } else {
-                $vmd.Targets[target].Repeat = true;
+                VMD.Targets[target].Repeat = true;
             }
         });
 
         // Append the form to the #vmd toolbar element.
-        $vmd.Toolbar.append(thisForm);
+        VMD.Toolbar.append(thisForm);
 
-        $vmd.$('.vmd-easing-dropdown').dropdown({
+        VMD.$('.vmd-easing-dropdown').dropdown({
             "set selected":"swing",
             "onChange": function (value,text,$choice) {
                 if (text.indexOf('...') > -1) {
-                    $vmd.$('.vmd-easing-data input').val ('[' + value + ']');
-                    $vmd.$('.vmd-easing-data').show();
+                    VMD.$('.vmd-easing-data input').val ('[' + value + ']');
+                    VMD.$('.vmd-easing-data').show();
                 } else {
-                    $vmd.$('.vmd-easing-data').hide();
+                    VMD.$('.vmd-easing-data').hide();
                 }
             }
         });
 
-        $vmd.$(".vmd-form").draggable( {
+        VMD.$(".vmd-form").draggable( {
             "handle": ".vmd-form-handle",
             "cursor": "move"
         });
 
-        $vmd.$('.vmd-easing-data').hide();
+        VMD.$('.vmd-easing-data').hide();
     }
 
     /*****************
@@ -299,7 +300,7 @@
       var propertiesMap = $target.data("VMD").propertiesMap,
         options = $target.data("VMD").options;
 
-      $vmd.$.each([ "duration", "delay", "easing" ], function(_, value) {
+      VMD.$.each([ "duration", "delay", "easing" ], function(_, value) {
         options[value] = $target.find("[name='" + value + "']").val();
       });
 
@@ -329,10 +330,23 @@
     }
 
     function clearElementStyles (element) {
-      if ($vmd.$.data(element, "velocity")) {
-        $vmd.$.data(element, "velocity").transformCache = {};
+      if (VMD.$.data(element, "velocity")) {
+        VMD.$.data(element, "velocity").transformCache = {};
       }
 
       /* Assumes the user isn't setting any inline styles. */
-      element.setAttribute("style", "position:" + $vmd.$.css(element, "position") + ";");
+      element.setAttribute("style", "position:" + VMD.$.css(element, "position") + ";");
     }
+
+  /*
+   * Select a toolbar button
+   */
+  VMD.selectButton = function ($target) {
+    var menuId = '#vmd-button-' + $target.data("vmd-button-letter");
+    VMD.closeMenus();
+
+    VMD.openMenu (VMD.$(menuId));
+
+    return (true);
+  }
+

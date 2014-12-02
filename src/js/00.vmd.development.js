@@ -1,8 +1,7 @@
 // Put any variables for development in here.
 
-$vmd = new Object;
+VMD = {};
 
-$vmd._linebreak = '\n';
+VMD._linebreak = '\n';
 
-$vmd._protocol = 'http:';
-
+VMD._protocol = 'http:';

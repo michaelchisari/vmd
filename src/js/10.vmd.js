@@ -1,71 +1,74 @@
-$vmd.enableEscapeKey = function() {
-    $vmd.body.keydown( function(event) {
+VMD.enableEscapeKey = function() {
+    VMD.body.keydown( function(event) {
         if (event.which == 27) {
-            $vmd.closeMenus();
+            VMD.closeMenus();
         }
     });
 }
 
-$vmd.enablePlay = function() {
-    $vmd.body.keydown( function(event) {
+VMD.enablePlay = function() {
+    VMD.body.keydown( function(event) {
         if (event.which === 49) {
-            if (!$vmd.active) return (true);
+            if (!VMD.active) return (true);
 
             // If we're on an input field, return
-            if($vmd.$("input,textarea").is(":focus")) return (true);
+            if(VMD.$("input,textarea").is(":focus")) return (true);
 
-            $vmd.animateAll();
+            VMD.animateAll();
         }
     });
 }
 
-$vmd.enableAnimationKeys = function() {
-    $vmd.body.keydown( function(event) {
-        for (t in $vmd.Targets) {
+VMD.enableAnimationKeys = function() {
+    VMD.body.keydown( function(event) {
+        for (t in VMD.Targets) {
             if (event.which == t) {
-                if (!$vmd.active) return (true);
+                if (!VMD.active) return (true);
 
                 // If we're on an input field, return
-                if($vmd.$("input,textarea").is(":focus")) return (true);
+                if(VMD.$("input,textarea").is(":focus")) return (true);
 
-                $vmd.animate($vmd.Targets[t]);
+                VMD.animate(VMD.Targets[t]);
+
+                return (false);
             }
         }
     });
 }
 
-$vmd.enableStop = function() {
-    $vmd.body.keydown( function(event) {
+VMD.enableStop = function() {
+    VMD.body.keydown( function(event) {
         if (event.which === 50) {
-            if (!$vmd.active) return (true);
+            if (!VMD.active) return (true);
 
             // If we're on an input field, return
-            if($vmd.$("input,textarea").is(":focus")) return (true);
+            if(VMD.$("input,textarea").is(":focus")) return (true);
 
-            $vmd.stopAll();
+            event.preventDefault();
+            VMD.stopAll();
         }
     });
 }
 
-$vmd.animateAll = function() {
+VMD.animateAll = function() {
     // Find all VMD targets
-    for (t in $vmd.Targets) {
-        $vmd.animate ($vmd.Targets[t]);
+    for (t in VMD.Targets) {
+        VMD.animate (VMD.Targets[t]);
     }
 
 }
 
-$vmd.stopAll = function() {
-    for (t in $vmd.Targets) {
-          $vmd.Targets[t] 
+VMD.stopAll = function() {
+    for (t in VMD.Targets) {
+          VMD.Targets[t] 
             .velocity("stop", true)
-            .velocity({ color: $vmd.INDICATOR_COLOR }, 75)
+            .velocity({ color: VMD._indicatorColor }, 75)
             .velocity("reverse");
     }
 }
 
-$vmd.animate = function (target) {
-   $vmd.updateParameters(target);
+VMD.animate = function (target) {
+   VMD.updateParameters(target);
 
    var index = target.data('vmd-index');
    var properties = target.data('vmd-propertiesMap');
@@ -82,50 +85,24 @@ $vmd.animate = function (target) {
     }
 }
 
-$vmd.updateParameters = function (target) {
+VMD.updateParameters = function (target) {
     var index = target.data('vmd-index');
     var character = String.fromCharCode(index).toUpperCase();
 
-    var form = $vmd.$('.vmd-button-' + character);
+    var form = VMD.$('.vmd-button-' + character);
     var transition = form.find("input[name=transition]").val();
     var easing = form.find("select[name=easing] option:selected").text();
     var duration = form.find("input[name=duration]").val();
     var delay = form.find("input[name=delay]").val();
 
-    $vmd.Targets[index].data("vmd-propertiesMap", transition);
-
-/*
-        begin: function(elements) {
-          $.each(elements, function(i, element) {
-            clearElementStyles(element);
-          });
-
-          $vmd.$(this).find("overlay.VMD code[name='propertiesMap']")
-            .velocity("stop", true)
-            .velocity({ color: $vmd.INDICATOR_COLOR }, 75)
-            .velocity("reverse");
-        },
-        complete: function(elements) {
-          var $this = $vmd.$(this),
-            propertiesMap = $this.find("overlay.VMD").data("VMD").propertiesMap,
-            options = $this.find("overlay.VMD").data("VMD").options;
-
-          if (options.loop === true && typeof propertiesMap === "string") {
-            $.each(elements, function(i, element) {
-              $vmd.$(this).velocity(propertiesMap, options);
-            });
-          }
-        }
-      }
-    }
-*/
+    VMD.Targets[index].data("vmd-propertiesMap", transition);
 
     var options = new Object;
 
     options.duration = duration;
     options.delay = delay;
     options.easing = easing;
-    options.loop = $vmd.Targets[index].Repeat;
+    options.loop = VMD.Targets[index].Repeat;
 
     options.begin = function() {
     }
@@ -133,36 +110,36 @@ $vmd.updateParameters = function (target) {
     options.complete = function() {
     }
 
-    $vmd.Targets[index].data("vmd-options", options);
+    VMD.Targets[index].data("vmd-options", options);
 
     return (true);
 }
 
-$vmd.enableOutlining = function() {
+VMD.enableOutlining = function() {
 
     /*****************
         Outlining
     *****************/
 
-    $vmd.body
+    VMD.body
         .keydown( function(event) {
-            if (!$vmd.active) return (false);
+            if (!VMD.active) return (false);
 
             if (event.shiftKey) {
-                $vmd.$(".vmd-outline").css("cursor", "pointer");
+                VMD.$(".vmd-outline").css("cursor", "pointer");
             }
         })
         .keyup( function(event) {
-            if (!$vmd.active) return (false);
+            if (!VMD.active) return (false);
 
             if (event.which === 16) {
-                $vmd.$(".vmd-outline").css("cursor", "");
+                VMD.$(".vmd-outline").css("cursor", "");
             }
         })
       .on("mouseover", function(event) {
-            if (!$vmd.active) return (false);
+            if (!VMD.active) return (false);
 
-        var $target = $vmd.$(event.target);
+        var $target = VMD.$(event.target);
 
             // Ignore menu elements for element selection
             if (!$target.closest("#vmd").length) {
@@ -180,8 +157,8 @@ $vmd.enableOutlining = function() {
       .on("mouseout", function(event) {
         //$(event.target).css("outline", "");
             //$(event.target).removeClass("vmd-outline");
-            $vmd.$(event.target).css("outline", "");
-            $vmd.$(event.target).css("cursor", "");
+            VMD.$(event.target).css("outline", "");
+            VMD.$(event.target).css("cursor", "");
       });
 
 
@@ -189,10 +166,10 @@ $vmd.enableOutlining = function() {
         Overlay
     ***************/
 
-    $vmd.body.click(function(event) {
+    VMD.body.click(function(event) {
 
         /* If VMD isn't active, return true and follow links and buttons */
-        if (!$vmd.active) 
+        if (!VMD.active) 
             return (true);
 
       /*******************
@@ -203,9 +180,9 @@ $vmd.enableOutlining = function() {
             return (false);
         }
 
-        $vmd.clearPageSelection();
+        VMD.clearPageSelection();
 
-      var $target = $vmd.$(event.target),
+      var $target = VMD.$(event.target),
         $overlay = $target.closest("overlay.VMD");
 
         /* Exclude any elements in the vmd toolbar */
@@ -216,22 +193,22 @@ $vmd.enableOutlining = function() {
       if ($target.hasClass("vmd-initialized")) {
 
             /* Bring menu to forefront */
-            $vmd.selectButton ($target);
+            VMD.selectButton ($target);
 
         } else {
         /*******************
            Initialization
         *******************/
 
-        $vmd.alphabetIndex++;
+        VMD._alphabetIndex++;
 
-            var alphabetLetter = String.fromCharCode($vmd.alphabetIndex);
+            var alphabetLetter = String.fromCharCode(VMD._alphabetIndex);
 
             $target.addClass("vmd-initialized");
             $target.data("vmd-button-letter", alphabetLetter);
 
         /* Properties Map */
-        $vmd.$("<code></code>")
+        VMD.$("<code></code>")
           .attr("name", "propertiesMap")
           .css({
             display: "none",
@@ -246,11 +223,11 @@ $vmd.enableOutlining = function() {
           })
           .prop("contenteditable", true)
           .prop("spellcheck", false)
-          .html($vmd.propertiesMapDefault)
+          .html(VMD.propertiesMapDefault)
           .appendTo($target);
 
         /* Key */
-        var $key = $vmd.$("<span></span>");
+        var $key = VMD.$("<span></span>");
         $key
           .attr("name", "key")
           .css({ 
@@ -269,7 +246,7 @@ $vmd.enableOutlining = function() {
             cursor: "default",
             userSelect: "none"
           })
-          .html(String.fromCharCode($vmd.alphabetIndex))
+          .html(String.fromCharCode(VMD._alphabetIndex))
                 .appendTo($target);
 
             //$target.append($key);
@@ -279,12 +256,12 @@ $vmd.enableOutlining = function() {
 
             var vmdButtonId = 'vmd-button-' + alphabetLetter;
             var vmdButton = '<button id="' + vmdButtonId + '" class="ui vmd-element button">A</button>';
-            vmdButton = $vmd.$(vmdButton).html(alphabetLetter);
-            $vmd.$("#vmd-ui-buttons").append (vmdButton);
+            vmdButton = VMD.$(vmdButton).html(alphabetLetter);
+            VMD.$("#vmd-ui-buttons").append (vmdButton);
 
-            $vmd.updateButton(vmdButtonId, $target);
+            VMD.updateButton(vmdButtonId, $target);
 
-            $vmd.selectButton ($target);
+            VMD.selectButton ($target);
         }
 
         return (true);
@@ -311,7 +288,7 @@ $vmd.enableOutlining = function() {
         ***********************/
 
         /* Container */
-        var $modal = $vmd.$("<modal></modal>");
+        var $modal = VMD.$("<modal></modal>");
         $modal.css({ 
           position: "absolute",
           left: "50%",
@@ -326,7 +303,7 @@ $vmd.enableOutlining = function() {
         });
 
         /* Key */
-        var $key = $vmd.$("<span></span>");
+        var $key = VMD.$("<span></span>");
         $key
           .attr("name", "key")
           .css({ 
@@ -344,11 +321,11 @@ $vmd.enableOutlining = function() {
             cursor: "default",
             userSelect: "none"
           })
-          .html(String.fromCharCode($vmd.alphabetIndex));
+          .html(String.fromCharCode(VMD._alphabetIndex));
 
 
         /* Label */
-        var $label = $vmd.$("<div></div>");
+        var $label = VMD.$("<div></div>");
         $label
           .html(getElementLabel($target))
           .css({
@@ -362,7 +339,7 @@ $vmd.enableOutlining = function() {
           .appendTo($modal);
 
         /* Properties Map */
-        $vmd.$("<code></code>")
+        VMD.$("<code></code>")
           .attr("name", "propertiesMap")
           .css({
             display: "block",
@@ -377,23 +354,23 @@ $vmd.enableOutlining = function() {
           })
           .prop("contenteditable", true)
           .prop("spellcheck", false)
-          .html($vmd.propertiesMapDefault)
+          .html(VMD.propertiesMapDefault)
           .appendTo($modal);
 
         /* Controls */
-        var $controls = $vmd.$("<table></table>");
+        var $controls = VMD.$("<table></table>");
         $controls
           .attr("name", "options")
           .appendTo($modal);
 
         /* Duration and delay */
         var $duration = 
-            $vmd.$("<input type='range' />")
+            VMD.$("<input type='range' />")
               .attr({ 
                 name: "duration",
                 min: "100",
                 max: "4000",
-                value: DURATION_DEFAULT,
+                value: _durationDefault,
                 step: "50"
               })
               .css({
@@ -401,18 +378,18 @@ $vmd.enableOutlining = function() {
               })
               .wrap("<td />")
               .parent()
-              .add("<td style='cursor: default; text-align: right; width: 100%;'>" + DURATION_DEFAULT + "ms</td>")
+              .add("<td style='cursor: default; text-align: right; width: 100%;'>" + _durationDefault + "ms</td>")
               .wrapAll("<tr></tr>")
               .parent()
               .appendTo($controls);
 
         var $delay = 
-            $vmd.$("<input type='range' />")
+            VMD.$("<input type='range' />")
               .attr({ 
                 name: "delay",
                 min: "0",
                 max: "2000",
-                value: DELAY_DEFAULT,
+                value: _delayDefault,
                 step: "25"
               })
               .css({
@@ -420,14 +397,14 @@ $vmd.enableOutlining = function() {
               })
               .wrap("<td />")
               .parent()
-              .add("<td style='cursor: default; text-align: right; width: 100%;'>" + DELAY_DEFAULT + "ms</td>")
+              .add("<td style='cursor: default; text-align: right; width: 100%;'>" + _delayDefault + "ms</td>")
               .wrapAll("<tr></tr>")
               .parent()
               .appendTo($controls);
 
         /* Easing */
         var $easing = 
-            $vmd.$("<select></select>")
+            VMD.$("<select></select>")
               .attr("name", "easing")
               .css({
                 backgroundColor: "transparent",
@@ -439,7 +416,7 @@ $vmd.enableOutlining = function() {
               .parent();
 
         var $easingArray = 
-            $vmd.$("<code></code>")
+            VMD.$("<code></code>")
               .attr("name", "easingArray")
               .css({
                 display: "none",
@@ -463,7 +440,7 @@ $vmd.enableOutlining = function() {
           .parent()
           .appendTo($controls);
 
-        $vmd.$("<option></option>")
+        VMD.$("<option></option>")
           .attr({
             "data-array": "true",
             value: "[500,20]"
@@ -471,7 +448,7 @@ $vmd.enableOutlining = function() {
           .html("spring physics...")
           .appendTo($easing.children());
 
-        $vmd.$("<option></option>")
+        VMD.$("<option></option>")
           .attr({
             "data-array": "true",
             value: "[.25,1,.25,1]"
@@ -479,7 +456,7 @@ $vmd.enableOutlining = function() {
           .html("cubic bezier...")
           .appendTo($easing.children());
 
-        $vmd.$("<option></option>")
+        VMD.$("<option></option>")
           .attr({
             "data-array": "true",
             value: "[ 4 ]"
@@ -488,21 +465,21 @@ $vmd.enableOutlining = function() {
           .appendTo($easing.children());
 
         $.each($.Velocity.Easings, function(name) {
-          $vmd.$("<option></option>")
+          VMD.$("<option></option>")
             .attr({
               name: name,
               value: name
             })
             .prop({
-              selected: (name === $vmd.EASING_DEFAULT)
+              selected: (name === VMD._easingDefault)
             })
             .html(name)
             .appendTo($easing.children());
         });
 
         /* Overlay insertion. */
-        var $overlay = $vmd.$("<overlay></overlay>")
-            .attr("id", "overlay-" + $vmd.alphabetIndex)
+        var $overlay = VMD.$("<overlay></overlay>")
+            .attr("id", "overlay-" + VMD._alphabetIndex)
             .css({
               width: "100%",
               left: "100%",
@@ -516,28 +493,28 @@ $vmd.enableOutlining = function() {
               mouse: "enter",
               propertiesMap: {},
               options: {
-                duration: $vmd.DURATION_DEFAULT,
-                delay: $vmd.DELAY_DEFAULT,
-                easing: $vmd.EASING_DEFAULT,
+                duration: VMD._durationDefault,
+                delay: VMD._delayDefault,
+                easing: VMD._easingDefault,
                 loop: false,
                 begin: function(elements) {
                   $.each(elements, function(i, element) {
                     clearElementStyles(element);
                   });
 
-                  $vmd.$(this).find("overlay.VMD code[name='propertiesMap']")
+                  VMD.$(this).find("overlay.VMD code[name='propertiesMap']")
                     .velocity("stop", true)
-                    .velocity({ color: $vmd.INDICATOR_COLOR }, 75)
+                    .velocity({ color: VMD._indicatorColor }, 75)
                     .velocity("reverse");
                 },
                 complete: function(elements) {
-                  var $this = $vmd.$(this),
+                  var $this = VMD.$(this),
                     propertiesMap = $this.find("overlay.VMD").data("VMD").propertiesMap,
                     options = $this.find("overlay.VMD").data("VMD").options;
 
                   if (options.loop === true && typeof propertiesMap === "string") {
                     $.each(elements, function(i, element) {
-                      $vmd.$(this).velocity(propertiesMap, options);
+                      VMD.$(this).velocity(propertiesMap, options);
                     });
                   }
                 }
@@ -559,4 +536,4 @@ $vmd.enableOutlining = function() {
 /*
  * Prepare the VMD subsystem.
  */
-$vmd.prep();
+VMD.prep();
