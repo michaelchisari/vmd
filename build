@@ -72,7 +72,8 @@ for d in ${!DIRS[@]}; do
         CSS="$(echo $CSS | sed 's/\"/\\\"/g')"
 
         OUTPUT+="\n\n// "$FILE"\n"
-        OUTPUT+="\$(\"body\").append(\"<style>$CSS</style>\");";
+        # OUTPUT+="\$(\"body\").append(\"<style>$CSS</style>\");";
+        OUTPUT="document.getElementsByTagName('body')[0].innerHTML += \"<style>$CSS</style>\");";
     }
     test "$E" == 'js' && {
         # Skip the development declaration file
@@ -116,7 +117,8 @@ for d in ${!DIRS[@]}; do
         WOFFDATA="$(echo $WOFFDATA | sed 's/\"/\\\"/g')"
 
         OUTPUT+="\n\n// "$FILE"\n"
-        OUTPUT+="\$(\"body\").append(\"<style>$WOFFDATA</style>\");";
+        # OUTPUT+="\$(\"body\").append(\"<style>$WOFFDATA</style>\");";
+        OUTPUT="document.getElementsByTagName('body')[0].innerHTML += \"<style>$WOFFDATA</style>\");";
     }
     
 done
