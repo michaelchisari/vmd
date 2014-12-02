@@ -1,6 +1,6 @@
-/***********************
-Helper Functions
-***********************/
+/*
+ * Helper Functions
+ */
 
 VMD.buildFunctions = function() {
 

@@ -30,6 +30,7 @@ VMD.initialize = function () {
 
   // Color list to cycle through, so forms are recognizable
   VMD._colorList = [ 'blue', 'orange', 'green', 'red', 'purple', 'teal' ];
+  VMD._colorReference = [ '#3b83c0', '#e07b53', '#5bbd72', '#d95c5c', '#564f8a', '#00b5ad' ];
   VMD._colorIndex = 0;
 
   /*
@@ -42,7 +43,7 @@ VMD.initialize = function () {
     ' * Note: Refer to "CSS Support" on http://VelocityJS.org for supported properties.',
     ' * Note: You have access to all UI pack effects: http://VelocityJS.org/#uiPack.',
     ' - Shift-click on an element: Initialize.',
-    ' - Click on a key identifier: Toggle looping.',
+    ' - Click on a menus Repeat icon: Toggle looping.',
     ' - Enter key (when modifying animation parameters): Animate.',
     ' - a-z keys: Restart/reset the associated animation.',
     ' - 1 key: Restart all animations.',
