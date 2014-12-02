@@ -48,11 +48,8 @@ VMD.loadLibraries = function vmdLoadLibraries() {
 VMD.loadJQuery = function vmdLoadJQuery() {
   
   // Check if a JQuery version is already loaded.
-  if (window.$) {
-    var jVersion = 'Unknown version'; 
-    if (typeof $.fn.jquery !== 'undefined')
-        jVersion = $.fn.jquery;
-    console.log ('JQuery already loaded: ' + jVersion);
+  if (window.jQuery) {
+    console.log ('JQuery already loaded: ' + $.fn.jquery);
     var jQueryExists = true;
   }
   
