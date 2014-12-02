@@ -49,13 +49,13 @@ VMD.loadJQuery = function vmdLoadJQuery() {
   
   // Check if a JQuery version is already loaded.
   if (window.jQuery) {
-    console.log ('JQuery already loaded: ' + $.fn.jquery);
+    console.log ('JQuery already loaded: ' + window.jQuery.fn.jquery);
     var jQueryExists = true;
   }
   
   if (jQueryExists) {
     // Use existing jQuery to load the jQuery we need.
-    $.getScript (VMD._protocol + '//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js', function() {
+    window.jQuery.getScript (VMD._protocol + '//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js', function() {
       VMD.$ = $.noConflict();
       VMD.loadLibraries();
     });
